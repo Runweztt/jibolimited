@@ -69,8 +69,8 @@ const Home = () => {
               Trade Crypto & Book Rides Seamlessly
             </h1>
             <p className="mt-6 text-[#cfd8ea] text-lg sm:text-xl max-w-xl mx-auto md:mx-0">
-              Jibo combines <strong className="text-[#3b82f6]">crypto trading</strong> with
-              <strong className="text-[#3b82f6]"> ride bookings</strong>. Secure, fast, and trusted by thousands.
+              Jibo combines <strong>crypto trading</strong> with
+              <strong > ride bookings</strong>. Secure, fast, and trusted by thousands.
             </p>
 
             <div className="mt-8 flex flex-col sm:flex-row items-center sm:items-stretch gap-4 justify-center md:justify-start">
