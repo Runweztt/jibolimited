@@ -3,86 +3,111 @@ import { assets } from "../assets/assets";
 
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-b mt-39 from-gray-400 to-white text-black px-6 md:px-16 lg:px-24 py-16">
-      {/* Top Footer */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
-        {/* Left Section */}
-        <div>
-          <img
-            src={assets.logo}
-            alt="Jibo Limited Logo"
-            className="mb-5 w-40"
-          />
-          <p className="text-black leading-relaxed">
-            Jibo Limited empowers users with smart crypto exchange, digital finance,
-            and mobility services — all in one ecosystem.
-          </p>
-        </div>
+    <footer className="bg-[#071224] text-gray-300">
+      {/* === CTA Section === */}
+      <section className="py-10 px-6 sm:px-10  md:px-16 lg:px-24 border-b border-[#142235]">
+        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-5 text-center sm:text-left">
+          <div>
+            <h2 className="text-xl sm:text-2xl font-semibold text-white">
+              Ready to get started?
+            </h2>
+            <p className="text-[#cbd8f2] text-sm mt-1">
+              Join Jibo today — trade crypto or book your first ride instantly.
+            </p>
+          </div>
 
-        {/* Center Section */}
-        <div>
-          <h3 className="text-xl font-semibold text-blue-500 mb-4">Company</h3>
-          <ul className="space-y-2">
-            <li>
-              <a href="/" className="hover:text-blue-400 transition-colors">
-                Home
-              </a>
-            </li>
-            <li>
-              <a href="/about" className="hover:text-blue-400 transition-colors">
-                About Us
-              </a>
-            </li>
-            <li>
-              <a href="/finance" className="hover:text-blue-400 transition-colors">
-                Finance
-              </a>
-            </li>
-            <li>
-              <a href="/logistics" className="hover:text-blue-400 transition-colors">
-                Logistics
-              </a>
-            </li>
-            <li>
-              <a href="/contact" className="hover:text-blue-400 transition-colors">
-                Contact
-              </a>
-            </li>
-          </ul>
-        </div>
-
-        {/* Right Section */}
-        <div>
-          <h3 className="text-xl font-semibold text-blue-500 mb-4">Get in Touch</h3>
-          <ul className="space-y-3 text-gray-400">
-            <li>
-              <strong className="text-black">Email:</strong> support@jiboltd.com
-            </li>
-            <li>
-              <strong className="text-black">Phone:</strong> +44 20 7123 4567
-            </li>
-            <li>
-              <strong className="text-black">Address:</strong> 22 Fleet Street, London, EC4Y 1AA, UK
-            </li>
-          </ul>
-
-          <div className="flex space-x-5 text-xl mt-6">
-            <a href="#" className="hover:text-blue-400 transition-all">
-              <i className="fab fa-facebook"></i>
+          <div className="flex gap-3 flex-wrap justify-center sm:justify-end">
+            <a
+              href="#register"
+              className="bg-[#3b82f6] hover:bg-[#2563eb] px-5 py-2.5 rounded-full text-sm font-medium text-white transition"
+            >
+              Create Account
             </a>
-            <a href="#" className="hover:text-blue-400 transition-all">
-              <i className="fab fa-twitter"></i>
-            </a>
-            <a href="#" className="hover:text-blue-400 transition-all">
-              <i className="fab fa-linkedin"></i>
+            <a
+              href="#Booking"
+              className="border border-[#3b82f6] hover:bg-[#3b82f6] hover:text-white px-5 py-2.5 rounded-full text-sm font-medium transition"
+            >
+              Book a Ride
             </a>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Bottom Footer */}
-      <div className="border-t border-gray-700 pt-6 text-center text-sm text-gray-500">
-        <p>© {new Date().getFullYear()} Jibo Limited. All rights reserved.</p>
+      {/* === Main Footer === */}
+      <div className="px-6 sm:px-10 mt-15 md:px-16 lg:px-24 py-10">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* Left Section */}
+          <div>
+            <img
+              src={assets.logo}
+              alt="Jibo Limited Logo"
+              className="mb-3 w-28"
+            />
+            <p className="text-sm text-gray-400 max-w-xs leading-relaxed">
+              Jibo Limited empowers users with smart crypto exchange, digital
+              finance, and mobility services — all in one ecosystem.
+            </p>
+          </div>
+
+          {/* Company Links */}
+          <div>
+            <h3 className="text-base font-semibold text-blue-400 mb-3">
+              Company
+            </h3>
+            <ul className="space-y-1.5 text-sm">
+              {["Home", "About Us", "Finance", "Logistics", "Contact"].map(
+                (item, idx) => (
+                  <li key={idx}>
+                    <a
+                      href={`/${item.toLowerCase().replace(" ", "")}`}
+                      className="hover:text-blue-400 transition-colors"
+                    >
+                      {item}
+                    </a>
+                  </li>
+                )
+              )}
+            </ul>
+          </div>
+
+          {/* Contact Section */}
+          <div>
+            <h3 className="text-base font-semibold text-blue-400 mb-3">
+              Get in Touch
+            </h3>
+            <ul className="space-y-1 text-sm text-gray-400">
+              <li>
+                <strong className="text-gray-200">Email:</strong>{" "}
+                support@jiboltd.com
+              </li>
+              <li>
+                <strong className="text-gray-200">Phone:</strong> +44 20 7123
+                4567
+              </li>
+              <li>
+                <strong className="text-gray-200">Address:</strong> 22 Fleet
+                Street, London, EC4Y 1AA, UK
+              </li>
+            </ul>
+
+            <div className="flex space-x-3 text-lg mt-4">
+              <a href="#" className="hover:text-blue-400 transition-colors">
+                <i className="fab fa-facebook"></i>
+              </a>
+              <a href="#" className="hover:text-blue-400 transition-colors">
+                <i className="fab fa-twitter"></i>
+              </a>
+              <a href="#" className="hover:text-blue-400 transition-colors">
+                <i className="fab fa-linkedin"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom Line */}
+        <div className="border-t border-[#142235] pt-4 mt-8 text-center text-xs text-gray-500">
+          <p>© {new Date().getFullYear()} Jibo Limited. All rights reserved.</p>
+        </div>
       </div>
     </footer>
   );

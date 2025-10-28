@@ -61,7 +61,7 @@ const Home = () => {
       </div>
 
       {/* HERO */}
-      <header className="pt-28 pb-16 mt-20 px-4 sm:px-6 md:px-12 lg:px-20 relative z-10">
+      <header className="pt-28 pb-16 px-4 sm:px-6 md:px-12 lg:px-20 relative z-10">
         <div className="max-w-7xl mx-auto flex flex-col-reverse md:flex-row items-center gap-12">
           {/* Left: Hero Text */}
           <div className="w-full md:w-1/2 text-center md:text-left">
@@ -211,22 +211,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* CTA Strip */}
-      <section className="py-12 px-4 sm:px-6 md:px-12 lg:px-20 bg-[#071224] border-t border-[#142235] mt-16 rounded-xl">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
-          <div>
-            <h4 className="text-2xl font-bold">Ready to get started?</h4>
-            <p className="text-[#cbd8f2] text-base mt-1">Join Jibo today — trade crypto or book your first ride instantly.</p>
-          </div>
-          <div className="flex gap-4">
-            <a href="#register" className="inline-block bg-[#3b82f6] px-6 py-3 rounded-full text-white font-medium">Create account</a>
-            <a href="#Booking" className="inline-block border border-[#3b82f6] px-6 py-3 rounded-full font-medium">Book a ride</a>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer component */}
-      
     </div>
   );
 };
