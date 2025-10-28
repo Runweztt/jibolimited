@@ -55,11 +55,16 @@ const Jibochatbot = () => {
   }, [ChatHistory]);
 
   return (
-    <div className="fixed bottom-5 right-5 z-50 flex flex-col items-end">
-      {/* Toggle Button */}
+    // wrapper does not capture pointer events to avoid blocking touches when closed
+    <div
+      className="fixed right-5 sm:bottom-5 bottom-20 z-[200] flex flex-col items-end pointer-events-none"
+      aria-live="polite"
+    >
+      {/* Toggle Button - always accepts pointer events */}
       <button
         onClick={() => setShowBot((prev) => !prev)}
-        className="bg-[#3b82f6] text-white p-4 rounded-full shadow-2xl hover:bg-blue-700 active:scale-95 transition-all duration-200 flex items-center justify-center"
+        className="pointer-events-auto bg-[#3b82f6] text-white p-4 rounded-full shadow-2xl hover:bg-[#2563eb] active:scale-95 transition-all duration-200 flex items-center justify-center"
+        aria-label={showBot ? "Close chat" : "Open chat"}
       >
         {showBot ? (
           <IoClose className="text-2xl" />
@@ -70,23 +75,17 @@ const Jibochatbot = () => {
 
       {/* Chat Window */}
       <div
-        className={`mt-3 w-[95vw] sm:w-[420px] max-w-[420px] rounded-2xl shadow-2xl border border-gray-800 transform transition-all duration-300 ease-in-out overflow-hidden ${
+        className={`mt-3 w-[95vw] sm:w-[420px] max-w-[420px] rounded-2xl shadow-2xl border border-[#142235] transform transition-all duration-300 ease-in-out overflow-hidden ${
           showBot
-            ? "opacity-100 translate-y-0"
+            ? "opacity-100 translate-y-0 pointer-events-auto"
             : "opacity-0 translate-y-5 pointer-events-none"
         }`}
-        style={{
-          background:
-            "linear-gradient(160deg, #0d1117 0%, #111827 70%, #000000 100%)",
-        }}
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-4 py-3 bg-[#3b82f6] text-white shadow-md">
+        <div className="flex items-center justify-between px-4 py-3 bg-[#071224] text-white shadow-md">
           <div className="flex items-center gap-2">
-            <Chatboticon  />
-            <h2 className="text-lg font-semibold tracking-wide">
-              Jibo Ai
-            </h2>
+            <Chatboticon />
+            <h2 className="text-lg font-semibold tracking-wide">Jibo Ai</h2>
           </div>
           <IoChevronDown className="text-2xl opacity-80 hover:opacity-100 cursor-pointer transition-opacity" />
         </div>
@@ -94,10 +93,11 @@ const Jibochatbot = () => {
         {/* Chat Body */}
         <div
           ref={chatbodymove}
-          className="flex flex-col gap-3 h-[420px] sm:h-[460px] overflow-y-auto p-4 bg-gradient-to-b from-gray-900 to-black scroll-smooth"
+          className="flex flex-col gap-3 h-[420px] sm:h-[460px] overflow-y-auto p-4"
+          style={{ background: "#0b1020" }}
         >
           {/* Initial Greeting */}
-          <div className="flex items-start gap-3 bg-white/5 backdrop-blur-md border border-gray-700 p-3 rounded-xl">
+          <div className="flex items-start gap-3 bg-[#071224] border border-[#142235] p-3 rounded-xl">
             <Chatboticon />
             <p className="text-gray-200 text-sm leading-relaxed">
               Hey there 👋 <br /> How can I help you today?
@@ -106,14 +106,14 @@ const Jibochatbot = () => {
 
           {/* Chat Messages */}
           {ChatHistory.map((chat, i) => (
-            <div className=" flex items-start gap-3 bg-white/5 backdrop-blur-md border border-gray-700 p-3 rounded-xl">
-            <Chatmessage key={i} chat={chat} />
+            <div key={i} className="flex items-start gap-3">
+              <Chatmessage chat={chat} />
             </div>
           ))}
         </div>
 
         {/* Footer */}
-        <div className="bg-black/80 backdrop-blur-md border-t border-gray-700 px-4 py-3">
+        <div className="bg-[#0b1020] border-t border-[#142235] px-4 py-3">
           <Chatform
             ChatHistory={ChatHistory}
             setChatHistory={setChatHistory}

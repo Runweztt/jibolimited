@@ -46,7 +46,7 @@ const Navbar = () => {
 
   return (
     <header className="fixed top-0 left-0 w-full z-[100] bg-[#0b1020] shadow-md">
-      <div className="flex items-center justify-between py-4 px-6 md:px-20 lg:px-32">
+      <div className="flex items-center justify-between py-4 px-6 md:px-10 lg:px-22">
         {/* Logo */}
         <button
           onClick={() => navTo("/")}
@@ -55,7 +55,7 @@ const Navbar = () => {
           <img
             src={assets.logo}
             alt="Jibo logo"
-            className="w-9 md:w-20"
+            className="w-20 md:w-20"
             onError={(e) => (e.target.style.display = "none")}
           />
         </button>
@@ -181,7 +181,9 @@ const Navbar = () => {
               </div>
             )}
           </div>
+        
         </nav>
+        
       </aside>
     </header>
   );

@@ -19,9 +19,9 @@ const App = () => {
     <div className="font-sans bg-gray-950 text-white min-h-screen">
       <AuthProvider>
         <Navbar />
-        <div className="mt-10">
+      
            <Jibochatbot />
-        </div>
+    
 
         <Routes>
           <Route path="/" element={<Home/>} />

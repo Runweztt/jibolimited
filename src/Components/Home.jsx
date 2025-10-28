@@ -4,6 +4,7 @@ import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer";
 import { Coincontext } from "../Context/Coincontext";
 import { assets } from "../assets/assets";
+import Jibochatbot from "../Pages/Jibochatbot";
 
 /**
  * Landing Page - Crypto Trading & Car Ride Booking
@@ -58,11 +59,13 @@ const Home = () => {
       {/* Navbar */}
       <div className="absolute top-0 left-0 w-full z-40">
         <Navbar />
+        
       </div>
 
       {/* HERO */}
-      <header className="pt-28 pb-16 px-4 sm:px-6 md:px-12 lg:px-20 relative z-10">
+      <header className="pt-28 pb-16 mt-25 px-4 sm:px-6 md:px-12 lg:px-20 relative z-10">
         <div className="max-w-7xl mx-auto flex flex-col-reverse md:flex-row items-center gap-12">
+          <Jibochatbot/>
           {/* Left: Hero Text */}
           <div className="w-full md:w-1/2 text-center md:text-left">
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight text-white fade-in-up">
