@@ -1,162 +1,189 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { assets } from "../assets/assets";
 import { useAuth } from "../Context/AuthContext";
+
+const NAV_LINKS = [
+  { name: "Home", path: "/" },
+  { name: "About", path: "/about" },
+  { name: "Contact", path: "/contact" },
+  { name: "Finance", path: "/finance" },
+  { name: "Logistics", path: "/logistics" },
+];
 
 const Navbar = () => {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const { user, logout } = useAuth();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const handleEsc = (e) => {
+      if (e.key === "Escape") setShowMobileMenu(false);
+    };
+    window.addEventListener("keydown", handleEsc);
+    return () => window.removeEventListener("keydown", handleEsc);
+  }, []);
+
+  // disable background scroll when menu is open
+  useEffect(() => {
+    document.body.style.overflow = showMobileMenu ? "hidden" : "auto";
+  }, [showMobileMenu]);
+
   const handleLogout = async () => {
     try {
       await logout();
-      navigate("/");
       setShowMobileMenu(false);
+      navigate("/");
     } catch (err) {
-      console.error("Logout failed:", err);
+      console.error(err);
     }
   };
 
-  const imgOnError = (e) => {
-    console.warn("Img failed to load:", e?.target?.src);
-    e.target.style.display = "none";
+  const navTo = (path) => {
+    navigate(path);
+    setShowMobileMenu(false);
   };
 
   return (
-    <div className="fixed top-0 left-0 w-full z-50 bg-[#0b1020] shadow-md">
-      <div className="container mx-auto flex justify-between items-center py-4 px-6 md:px-20 lg:px-32">
+    <header className="fixed top-0 left-0 w-full z-[100] bg-[#0b1020] shadow-md">
+      <div className="flex items-center justify-between py-4 px-6 md:px-20 lg:px-32">
         {/* Logo */}
-        <img
-          src={assets.logo}
-          alt="logo"
-          className="w-9 md:w-20 cursor-pointer"
-          onClick={() => navigate("/")}
-          onError={imgOnError}
-        />
+        <button
+          onClick={() => navTo("/")}
+          className="flex items-center gap-3"
+        >
+          <img
+            src={assets.logo}
+            alt="Jibo logo"
+            className="w-9 md:w-20"
+            onError={(e) => (e.target.style.display = "none")}
+          />
+        </button>
 
-        {/* Desktop Menu */}
-        <ul className="hidden md:flex gap-8 text-white font-medium">
-          <Link to="/" className="hover:text-blue-400 transition">
-            Home
-          </Link>
-          <Link to="/about" className="hover:text-blue-400 transition">
-            About
-          </Link>
-          <Link to="/contact" className="hover:text-blue-400 transition">
-            Contact
-          </Link>
-          <Link to="/finance" className="hover:text-blue-400 transition">
-            Finance
-          </Link>
-          <Link to="/logistics" className="hover:text-blue-400 transition">
-            Logistics
-          </Link>
-        </ul>
+        {/* Desktop Links */}
+        <nav className="hidden md:flex gap-8 text-white font-medium">
+          {NAV_LINKS.map((link) => (
+            <Link
+              key={link.name}
+              to={link.path}
+              className="hover:text-blue-400 transition"
+            >
+              {link.name}
+            </Link>
+          ))}
+        </nav>
 
-        {/* Auth Button */}
-        <div>
+        {/* Desktop Auth Buttons */}
+        <div className="hidden md:block">
           {user ? (
             <button
               onClick={handleLogout}
-              className="hidden md:block bg-red-600 hover:bg-red-700 px-8 py-2 rounded-full text-white font-semibold transition"
+              className="bg-red-600 hover:bg-red-700 px-6 py-2 rounded-full text-white font-semibold transition"
             >
               Logout
             </button>
           ) : (
             <button
-              onClick={() => navigate("/login")}
-              className="hidden md:block bg-blue-600 hover:bg-blue-700 px-8 py-2 rounded-full text-white font-semibold transition"
+              onClick={() => navTo("/login")}
+              className="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-full text-white font-semibold transition"
             >
               Sign In
             </button>
           )}
         </div>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile menu button */}
         <button
           onClick={() => setShowMobileMenu(true)}
-          className="md:hidden w-8 h-8 p-1 flex items-center justify-center cursor-pointer"
-          aria-label="Open menu"
+          className="md:hidden p-2"
         >
-          <img
-            src={assets.menu_icon}
-            alt="menu"
-            className="w-7 h-7"
-            onError={imgOnError}
-            style={{ filter: "invert(1)" }}
-          />
+          <svg
+            className="w-7 h-7 text-white"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+          >
+            <path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z" />
+          </svg>
         </button>
       </div>
 
-      {/* Mobile Menu */}
-      <div
-        className={`md:hidden fixed top-0 right-0 h-full bg-[#0b0b25] text-white transition-all duration-300 ease-in-out shadow-lg ${
-          showMobileMenu ? "w-64" : "w-0 overflow-hidden"
+      {/* Overlay behind the menu */}
+      {showMobileMenu && (
+        <div
+          className="fixed inset-0 bg-black/50 z-[200]"
+          onClick={() => setShowMobileMenu(false)}
+        />
+      )}
+
+      {/* Mobile menu drawer */}
+      <aside
+        className={`fixed top-0 right-0 h-full w-72 bg-[#0b0b25] text-white shadow-2xl z-[300] transform transition-transform duration-300 ${
+          showMobileMenu ? "translate-x-0" : "translate-x-full"
         }`}
-        style={{ zIndex: 60 }}
       >
-        {/* Close Button */}
-        <div className="flex justify-end p-6 cursor-pointer">
+        <div className="flex justify-end p-6">
           <button
             onClick={() => setShowMobileMenu(false)}
-            aria-label="Close menu"
+            className="p-2 rounded-full hover:bg-white/10"
           >
-            {assets.cross_icon ? (
-              <img
-                src={assets.cross_icon}
-                alt="close"
-                className="w-6 invert" // makes it white
-                onError={imgOnError}
+            <svg
+              className="w-6 h-6 text-white"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+            >
+              <path
+                d="M6 6L18 18M6 18L18 6"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
-            ) : (
-              // fallback SVG (white)
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="white"
-                viewBox="0 0 24 24"
-                className="w-6 h-6"
-              >
-                <path d="M6 6L18 18M6 18L18 6" stroke="white" strokeWidth="2" />
-              </svg>
-            )}
+            </svg>
           </button>
         </div>
 
-        {/* Links */}
-        <ul className="flex flex-col items-center gap-6 text-lg font-medium mt-5">
-          {["Home", "About", "Contact", "Finance", "Logistics"].map((item) => (
-            <Link
-              key={item}
-              to={`/${item === "Home" ? "" : item.toLowerCase()}`}
-              onClick={() => setShowMobileMenu(false)}
-              className="hover:text-blue-400 transition"
-            >
-              {item}
-            </Link>
-          ))}
+        <nav className="px-6">
+          <ul className="flex flex-col gap-6">
+            {NAV_LINKS.map((link) => (
+              <li key={link.name}>
+                <button
+                  onClick={() => navTo(link.path)}
+                  className="w-full text-left text-lg font-medium hover:text-blue-400 transition"
+                >
+                  {link.name}
+                </button>
+              </li>
+            ))}
+          </ul>
 
-          {user ? (
-            <button
-              onClick={handleLogout}
-              className="mt-4 bg-red-600 hover:bg-red-700 px-8 py-2 rounded-full text-white font-semibold transition"
-            >
-              Logout
-            </button>
-          ) : (
-            <button
-              onClick={() => {
-                navigate("/login");
-                setShowMobileMenu(false);
-              }}
-              className="mt-4 bg-blue-600 hover:bg-blue-700 px-8 py-2 rounded-full text-white font-semibold transition"
-            >
-              Sign In
-            </button>
-          )}
-        </ul>
-      </div>
-    </div>
+          <div className="mt-8">
+            {user ? (
+              <button
+                onClick={handleLogout}
+                className="w-full bg-red-600 hover:bg-red-700 px-4 py-2 rounded-full text-white font-semibold transition"
+              >
+                Logout
+              </button>
+            ) : (
+              <div className="flex flex-col gap-3">
+                <button
+                  onClick={() => navTo("/login")}
+                  className="w-full bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-full text-white font-semibold transition"
+                >
+                  Sign In
+                </button>
+                <button
+                  onClick={() => navTo("/register")}
+                  className="w-full border border-blue-600 text-blue-400 px-4 py-2 rounded-full font-semibold transition"
+                >
+                  Register
+                </button>
+              </div>
+            )}
+          </div>
+        </nav>
+      </aside>
+    </header>
   );
 };
 
