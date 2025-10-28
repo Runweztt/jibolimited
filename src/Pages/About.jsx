@@ -1,5 +1,4 @@
-import React from "react";
-import Footer from "../Components/Footer";
+
 
 const About = () => {
   return (
@@ -74,7 +73,7 @@ const About = () => {
         </button>
       </section>
 
-      <Footer />
+    
     </div>
   );
 };

@@ -1,5 +1,4 @@
-import React from "react";
-import Footer from "../Components/Footer";
+
 
 const Contact = () => {
   return (
@@ -77,7 +76,7 @@ const Contact = () => {
         ></iframe>
       </section>
 
-      <Footer />
+    
     </div>
   );
 };
