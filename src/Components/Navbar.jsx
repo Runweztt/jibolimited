@@ -31,7 +31,7 @@ const Navbar = () => {
     <div className="absolute top-0 left-0 w-full z-50  bg-[#0b1020]"> {/* bumped z-index */}
       <div className="container mx-auto flex justify-between items-center py-4 px-6 md:px-20 lg:px-32">
         {/* Logo */}
-        <img src={assets.logo} alt="logo" className="w-28 md:w-20" onError={imgOnError} />
+        <img src={assets.logo} alt="logo" className="w-9 md:w-20" onError={imgOnError} />
 
         {/* Desktop Menu */}
         <ul className="hidden md:flex gap-8 text-white font-medium">

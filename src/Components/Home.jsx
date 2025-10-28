@@ -161,7 +161,7 @@ const Home = () => {
                 <h3 className="text-xl font-semibold mb-3">{f.title}</h3>
                 <p className="text-[#cbd8f2] text-sm">{f.desc}</p>
                 <div className="mt-5">
-                  <a className="text-[#3b82f6] text-sm hover:underline" href="#Crypto">Start Trading →</a>
+                  {/* <a className="text-[#3b82f6] text-sm hover:underline" href="#Crypto"></a> */}
                 </div>
               </div>
             ))}
@@ -185,7 +185,7 @@ const Home = () => {
                 <h3 className="text-xl font-semibold mb-3">{f.title}</h3>
                 <p className="text-[#cbd8f2] text-sm">{f.desc}</p>
                 <div className="mt-5">
-                  <a className="text-[#3b82f6] text-sm hover:underline" href="#Booking">Book Now →</a>
+                  {/* <a className="text-[#3b82f6] text-sm hover:underline" href="#Booking"> </a> */}
                 </div>
               </div>
             ))}
