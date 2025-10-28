@@ -60,7 +60,7 @@ const Login = () => {
         </form>
         <button
           onClick={handleGoogleLogin}
-          className="w-full mt-4 bg-red-600 hover:bg-red-700 py-2 rounded-lg font-semibold"
+          className="w-full mt-4 bg-gray-500  py-2 rounded-lg font-semibold"
         >
           Continue with Google
         </button>

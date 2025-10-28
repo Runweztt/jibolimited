@@ -76,13 +76,13 @@ const Home = () => {
             <div className="mt-8 flex flex-col sm:flex-row items-center sm:items-stretch gap-4 justify-center md:justify-start">
               <a
                 href="#Booking"
-                className="w-full sm:w-auto text-center border border-[#3b82f6] px-6 py-4 rounded-full hover:bg-[#3b82f6] hover:text-white transition font-medium"
+                className="w-full sm:w-auto text-center border border-[#3b82f6] px-4 py-4 rounded-full hover:bg-[#3b82f6] hover:text-white transition font-medium"
               >
                 Book Ride
               </a>
               <a
                 href="#Crypto"
-                className="w-full sm:w-auto text-center bg-[#3b82f6] px-6 py-4 rounded-full text-white hover:bg-[#2563eb] transition font-medium"
+                className="w-full sm:w-auto text-center bg-[#3b82f6] px-4 py-4 rounded-full text-white hover:bg-[#2563eb] transition font-medium"
               >
                 Crypto Exchange
               </a>
