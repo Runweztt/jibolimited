@@ -2,28 +2,34 @@
 import React, { useState } from "react";
 import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { auth, db, googleProvider } from "../../Firebase.js";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // If the user was redirected here, preserve the original page to send them back.
+  const from = location.state?.from?.pathname || "/finance";
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setError("");
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      navigate("/finance");
+      navigate(from, { replace: true });
     } catch (err) {
       setError(err.message);
     }
   };
 
   const handleGoogleLogin = async () => {
+    setError("");
     try {
       await signInWithPopup(auth, googleProvider);
-      navigate("/finance");
+      navigate(from, { replace: true });
     } catch (err) {
       setError(err.message);
     }

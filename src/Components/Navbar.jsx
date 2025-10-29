@@ -7,8 +7,8 @@ const NAV_LINKS = [
   { name: "Home", path: "/" },
   { name: "About", path: "/about" },
   { name: "Contact", path: "/contact" },
-  { name: "Finance", path: "/finance" },
-  { name: "Logistics", path: "/logistics" },
+  { name: "Crypto", path: "/finance" },
+  { name: "Book Ride", path: "/logistics" },
 ];
 
 const Navbar = () => {
@@ -55,7 +55,7 @@ const Navbar = () => {
           <img
             src={assets.logo}
             alt="Jibo logo"
-            className="w-20 md:w-20"
+            className="w-18 md:w-20"
             onError={(e) => (e.target.style.display = "none")}
           />
         </button>
