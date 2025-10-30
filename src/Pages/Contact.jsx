@@ -1,5 +1,4 @@
 
-
 const Contact = () => {
   return (
     <div className="bg-gradient-to-b from-gray-900 to-black text-gray-300 font-inter">
@@ -75,7 +74,6 @@ const Contact = () => {
           loading="lazy"
         ></iframe>
       </section>
-
     
     </div>
   );

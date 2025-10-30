@@ -57,7 +57,7 @@ const Jibochatbot = () => {
   return (
     // wrapper does not capture pointer events to avoid blocking touches when closed
     <div
-      className="fixed right-5 sm:bottom-5 bottom-20 z-[200] flex flex-col items-end pointer-events-none"
+      className="fixed right-5 sm:bottom-5 bottom-0 z-[200] flex flex-col items-end pointer-events-none"
       aria-live="polite"
     >
       {/* Toggle Button - always accepts pointer events */}
@@ -82,7 +82,8 @@ const Jibochatbot = () => {
         }`}
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-4 py-3 bg-[#071224] text-white shadow-md">
+        <div className="fixed right-5 bottom-4 sm:bottom-6 top-auto z-[200] flex flex-col items-end pointer-events-none sm:translate-y-0 translate-y-20"
+>
           <div className="flex items-center gap-2">
             <Chatboticon />
             <h2 className="text-lg font-semibold tracking-wide">Jibo Ai</h2>
@@ -106,7 +107,7 @@ const Jibochatbot = () => {
 
           {/* Chat Messages */}
           {ChatHistory.map((chat, i) => (
-            <div key={i} className="flex items-start gap-3">
+            <div key={i} className="flex items-start gap-3 bg-[#071224] border border-[#142235] p-3 rounded-xl">
               <Chatmessage chat={chat} />
             </div>
           ))}

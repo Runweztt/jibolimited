@@ -20,7 +20,9 @@ const App = () => {
       <AuthProvider>
         <Navbar />
       
+  
            <Jibochatbot />
+
     
 
         <Routes>
