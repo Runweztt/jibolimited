@@ -45,8 +45,8 @@ const Navbar = () => {
   };
 
   return (
-    <header className="fixed top-0 left-0 w-full z-[100] bg-[#0b1020] shadow-md">
-      <div className="flex items-center justify-between py-4 px-6 md:px-10 lg:px-22">
+    <header className="fixed top-0 left-0 w-full z-[100] bg-[#0b1020]/90 shadow-md">
+      <div className="flex items-center justify-between py-4 px-6 md:px-10 lg:px-20">
         {/* Logo */}
         <button
           onClick={() => navTo("/")}

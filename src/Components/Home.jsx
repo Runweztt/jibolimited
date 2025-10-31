@@ -50,8 +50,8 @@ const Home = () => {
           100% { transform: translateX(-50%); }
         }
         .fade-up { animation: fadeInUp 0.8s ease both; }
-        .floaty { animation: floaty 6s ease-in-out infinite; }
-        .ticker-scroll { animation: scrollLeft 18s linear infinite; }
+        .floaty { animation: floaty 10s ease-in-out infinite; }
+        .ticker-scroll { animation: scrollLeft 38s linear infinite; }
       `}</style>
 
       {/* Navbar */}
@@ -69,7 +69,7 @@ const Home = () => {
             </h1>
             <p className="text-[#cfd8ea] text-lg sm:text-xl max-w-md mx-auto md:mx-0">
               Experience the fusion of <strong>crypto trading</strong> and
-              <strong> smart ride booking</strong> — secure, fast, and reliable.
+              <strong> smart ride booking</strong> secure, fast, and reliable.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start mt-6">
               <a

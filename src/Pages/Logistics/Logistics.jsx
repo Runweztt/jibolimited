@@ -1,3 +1,4 @@
+// src/Pages/Logistics/Logistics.jsx
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../../Context/AuthContext";
@@ -11,14 +12,14 @@ import {
 } from "react-icons/fa";
 
 const CARS = [
-  { id: 1, name: "Toyota Prado", price: 150000, passengers: 5, transmission: "Auto", airCondition: true, doors: 4, rating: 4.8, reviews: 210, image: "/images/prado.jpg" },
+  { id: 1, name: "Toyota Prado", price: 150000, passengers: 5, transmission: "Auto", airCondition: true, doors: 4, rating: 4.8, reviews: 210, image: "/assets/pradojeep.jpg" },
   { id: 2, name: "Mercedes G-Wagon", price: 350000, passengers: 5, transmission: "Auto", airCondition: true, doors: 4, rating: 4.9, reviews: 320, image: "/images/gwagon.jpg" },
   { id: 3, name: "Lexus RX 350", price: 180000, passengers: 5, transmission: "Auto", airCondition: true, doors: 4, rating: 4.7, reviews: 185, image: "/images/lexus.jpg" },
   { id: 4, name: "Range Rover Vogue", price: 400000, passengers: 5, transmission: "Auto", airCondition: true, doors: 4, rating: 4.9, reviews: 450, image: "/images/range.jpg" },
 ];
 
 const Logistics = () => {
-  const { user } = useAuth();               // auth check
+  const { user } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -30,10 +31,12 @@ const Logistics = () => {
   const [total, setTotal] = useState(car.price);
   const [showAlert, setShowAlert] = useState(false);
 
-  useEffect(() => { setTotal(car.price * days); }, [car, days]);
+  useEffect(() => {
+    setTotal(car.price * days);
+  }, [car, days]);
 
-  // Only proceed to open WhatsApp when user is logged in. Otherwise redirect to login.
   const handleBook = (selectedCar) => {
+    // auth guard for action
     if (!user) {
       navigate("/login", { state: { from: location } });
       return;
@@ -62,7 +65,7 @@ Total: ₦${(bookedCar.price * days).toLocaleString()}
 
   return (
     <div className="min-h-screen bg-[#030318] text-white font-sans">
-      {/* Hero Section */}
+      {/* Hero */}
       <section className="relative h-[60vh] flex items-center justify-center bg-cover bg-center" style={{ backgroundImage: "url('/images/hero-car.jpg')" }}>
         <div className="absolute inset-0 bg-black/60" />
         <div className="relative z-10 text-center max-w-2xl">
@@ -77,7 +80,11 @@ Total: ₦${(bookedCar.price * days).toLocaleString()}
         <div className="max-w-5xl mx-auto bg-[#0b0b25] border border-blue-900 rounded-3xl p-8 shadow-2xl">
           <h2 className="text-3xl font-bold text-center text-blue-400 mb-10">Ride Booking Details</h2>
 
-          {showAlert && (<div className="bg-red-800/50 text-red-200 border border-red-500 px-4 py-3 rounded-lg mb-6 text-center">⚠️ Please fill in your name, pickup, and destination before booking.</div>)}
+          {showAlert && (
+            <div className="bg-red-800/50 text-red-200 border border-red-500 px-4 py-3 rounded-lg mb-6 text-center">
+              ⚠️ Please fill in your name, pickup, and destination before booking.
+            </div>
+          )}
 
           <div className="grid md:grid-cols-2 gap-6">
             <div>
@@ -123,6 +130,7 @@ Total: ₦${(bookedCar.price * days).toLocaleString()}
         </div>
       </section>
 
+      {/* Car Selection */}
       <section className="max-w-7xl mx-auto mt-20 px-4 pb-20">
         <div className="text-center mb-8">
           <span className="bg-blue-900/30 text-blue-400 px-4 py-1 rounded-full text-sm font-semibold">Popular Rental Deals</span>
@@ -130,22 +138,23 @@ Total: ₦${(bookedCar.price * days).toLocaleString()}
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {CARS.map((car) => (
-            <div key={car.id} className="bg-[#0b0b25] border border-blue-800 rounded-2xl overflow-hidden shadow-lg transition transform hover:scale-[1.02]">
-              <img src={car.image} alt={car.name} className="w-full h-40 object-cover" />
+          {CARS.map((carItem) => (
+            <div key={carItem.id} className="bg-[#0b0b25] border border-blue-800 rounded-2xl overflow-hidden shadow-lg transition transform hover:scale-[1.02]">
+              <img src={carItem.image} alt={carItem.name} className="w-full h-40 object-cover" />
               <div className="p-5">
-                <h3 className="text-lg font-semibold text-blue-400">{car.name}</h3>
-                <p className="text-sm text-gray-400 mt-1">⭐ {car.rating} ({car.reviews} reviews)</p>
+                <h3 className="text-lg font-semibold text-blue-400">{carItem.name}</h3>
+                <p className="text-sm text-gray-400 mt-1">⭐ {carItem.rating} ({carItem.reviews} reviews)</p>
+
                 <div className="flex flex-wrap items-center gap-3 text-gray-400 text-sm mt-3">
-                  <span className="flex items-center gap-1"><FaUsers /> {car.passengers}</span>
-                  <span className="flex items-center gap-1"><FaCarSide /> {car.transmission}</span>
-                  {car.airCondition && <span className="flex items-center gap-1"><FaSnowflake /> A/C</span>}
-                  <span>{car.doors} Doors</span>
+                  <span className="flex items-center gap-1"><FaUsers /> {carItem.passengers}</span>
+                  <span className="flex items-center gap-1"><FaCarSide /> {carItem.transmission}</span>
+                  {carItem.airCondition && <span className="flex items-center gap-1"><FaSnowflake /> A/C</span>}
+                  <span>{carItem.doors} Doors</span>
                 </div>
 
                 <div className="mt-4 flex justify-between items-center">
-                  <p className="text-gray-300"><span className="text-blue-400 font-bold">₦{car.price.toLocaleString()}</span>/day</p>
-                  <button onClick={() => handleBook(car)} className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-semibold flex items-center gap-2"><FaWhatsapp /> Rent Now</button>
+                  <p className="text-gray-300"><span className="text-blue-400 font-bold">₦{carItem.price.toLocaleString()}</span>/day</p>
+                  <button onClick={() => handleBook(carItem)} className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-semibold flex items-center gap-2"><FaWhatsapp /> Rent Now</button>
                 </div>
               </div>
             </div>
