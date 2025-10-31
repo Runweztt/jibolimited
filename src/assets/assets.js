@@ -7,6 +7,7 @@ import landcruiser from './landcruiser.jpg'
 import  pradojeep from './pradojeep.jpg'
 import Range from './Range.jpg'
 import  lexus from './lexus.jpeg'
+import jibo_office from './jibo_office.jpg'
 
 
 export const assets = {
@@ -18,6 +19,7 @@ export const assets = {
     landcruiser,
     pradojeep,
     Range,
-    lexus
+    lexus,
+    jibo_office
 }
 

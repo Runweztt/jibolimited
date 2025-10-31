@@ -128,10 +128,10 @@ const Finance = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#030318] text-white px-4 sm:px-8 md:px-12 py-10">
+    <div className="min-h-screen bg-[#0b1020] text-white px-4 sm:px-8 md:px-12 py-10">
       {/* Hero */}
-      <div className="text-center mt-24 mb-10">
-        <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold mb-4 text-blue-400 leading-tight">
+      <div className="text-center mt-20 mb-10">
+        <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold mb-4 text-white leading-tight">
           Jibo Currency Exchange
         </h1>
         <p className="text-gray-300 mb-6 max-w-2xl mx-auto text-sm sm:text-base md:text-lg">
@@ -178,7 +178,7 @@ const Finance = () => {
           </button>
         </form>
 
-        {/* Trade Button (no WhatsApp icon) */}
+        {/* Trade Button  */}
         <button
           onClick={() => handleTrade(selectedCoin)}
           className="mt-5 bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-xl font-semibold text-white mx-auto text-sm sm:text-base"
@@ -189,7 +189,7 @@ const Finance = () => {
 
       {/* Coin Table */}
       <div className="overflow-x-auto">
-        <div className="min-w-full bg-[#0b0b25] rounded-xl shadow-lg border border-blue-900">
+        <div className="min-w-full bg-[#0b1020] rounded-xl shadow-lg border border-blue-900">
           {/* Table Header */}
           <div className="grid grid-cols-3 sm:grid-cols-5 font-semibold text-gray-400 border-b border-blue-800 p-3 sm:p-4 text-[11px] sm:text-xs md:text-sm uppercase text-center">
             <p>Coin</p>

@@ -117,7 +117,7 @@ const Navbar = () => {
 
       {/* Mobile menu drawer */}
       <aside
-        className={`fixed top-0 right-0 h-full w-72 bg-[#0b0b25] text-white shadow-2xl z-[300] transform transition-transform duration-300 ${
+        className={`fixed top-0 right-0 h-full w-72 bg-[#0b1020]/90 text-white shadow-2xl z-[300] transform transition-transform duration-300 ${
           showMobileMenu ? "translate-x-0" : "translate-x-full"
         }`}
       >

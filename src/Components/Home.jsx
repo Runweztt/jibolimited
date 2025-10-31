@@ -186,6 +186,26 @@ const Home = () => {
           </div>
         </div>
       </section>
+        {/* FAQ */}
+      <section className="px-6 md:px-12 lg:px-24 py-12">
+        <div className="max-w-5xl mx-auto">
+          <h4 className="text-xl font-bold text-white mb-4">Frequently asked questions</h4>
+          <div className="space-y-3">
+            <details className="bg-[#071224] border border-[#142235] rounded-lg p-4">
+              <summary className="font-semibold text-white cursor-pointer">How do I start trading crypto?</summary>
+              <p className="text-gray-300 mt-2">Create an account, verify, then use our Finance page to browse coins and hit the Trade button.</p>
+            </details>
+            <details className="bg-[#071224] border border-[#142235] rounded-lg p-4">
+              <summary className="font-semibold text-white cursor-pointer">How do I book a ride?</summary>
+              <p className="text-gray-300 mt-2">Visit Logistics, choose a vehicle and fill booking details. Confirming opens WhatsApp to finalise the booking.</p>
+            </details>
+            <details className="bg-[#071224] border border-[#142235] rounded-lg p-4">
+              <summary className="font-semibold text-white cursor-pointer">Is my data secure?</summary>
+              <p className="text-gray-300 mt-2">Yes — we prioritise security and use best practices for user data and authentication.</p>
+            </details>
+          </div>
+        </div>
+      </section>
 
      
     </div>

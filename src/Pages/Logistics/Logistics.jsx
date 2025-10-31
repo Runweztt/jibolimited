@@ -1,10 +1,10 @@
-// src/Pages/Logistics/Logistics.jsx
+
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../../Context/AuthContext";
 import { assets } from "../../assets/assets";
 import {
-  FaWhatsapp,
+
   FaCalendarAlt,
   FaMapMarkerAlt,
   FaCarSide,
@@ -65,12 +65,12 @@ Total: ₦${(bookedCar.price * days).toLocaleString()}
   };
 
   return (
-    <div className="min-h-screen bg-[#030318] text-white font-sans">
+    <div className="min-h-screen bg-[#0b1020] text-white font-sans">
       {/* Hero */}
       <section className="relative h-[60vh] flex items-center justify-center bg-cover bg-center" style={{ backgroundImage: "url('/images/hero-car.jpg')" }}>
-        <div className="absolute inset-0 bg-black/60" />
-        <div className="relative z-10 text-center max-w-2xl">
-          <h1 className="text-5xl font-extrabold text-blue-400 mb-4">Premium Car Rentals & Airport Pickups</h1>
+        <div className="absolute inset-0 bg-[#0b1020]" />
+        <div className="relative z-10 mt-20 text-center max-w-2xl">
+          <h1 className="text-5xl font-extrabold  text-white mb-4">Premium Car Rentals & Airport Pickups</h1>
           <p className="text-gray-300 mb-6 text-lg">Book your ride across Lagos in minutes — luxury, comfort, and reliability guaranteed.</p>
           <a href="#booking" className="bg-blue-600 hover:bg-blue-700 px-8 py-3 rounded-xl font-semibold text-white shadow-md">Book a Ride</a>
         </div>
@@ -78,12 +78,12 @@ Total: ₦${(bookedCar.price * days).toLocaleString()}
 
       {/* Booking Section */}
       <section id="booking" className="py-16 px-4 md:px-10">
-        <div className="max-w-5xl mx-auto bg-[#0b0b25] border border-blue-900 rounded-3xl p-8 shadow-2xl">
+        <div className="max-w-5xl mx-auto bg-[#0b1020] border border-blue-900 rounded-3xl p-8 shadow-2xl">
           <h2 className="text-3xl font-bold text-center text-blue-400 mb-10">Ride Booking Details</h2>
 
           {showAlert && (
             <div className="bg-red-800/50 text-red-200 border border-red-500 px-4 py-3 rounded-lg mb-6 text-center">
-              ⚠️ Please fill in your name, pickup, and destination before booking.
+               Please fill in your name, pickup, and destination before booking.
             </div>
           )}
 
@@ -113,7 +113,7 @@ Total: ₦${(bookedCar.price * days).toLocaleString()}
           </div>
 
           <div className="mt-10 grid md:grid-cols-2 gap-8 items-center">
-            <div className="bg-[#11113a] border border-blue-900 p-6 rounded-2xl shadow-lg">
+            <div className="bg-[#101028] border border-blue-900 p-6 rounded-2xl shadow-lg">
               <h3 className="text-xl font-semibold mb-3 text-blue-400">Booking Summary</h3>
               <p className="text-gray-300 flex items-center gap-2"><FaMapMarkerAlt /> <strong>Pickup:</strong> {pickup || "—"}</p>
               <p className="text-gray-300 flex items-center gap-2 mt-2"><FaMapMarkerAlt /> <strong>Destination:</strong> {destination || "—"}</p>
@@ -124,7 +124,7 @@ Total: ₦${(bookedCar.price * days).toLocaleString()}
 
             <div className="text-center">
               <button onClick={() => handleBook()} className="bg-blue-600 hover:bg-blue-700 px-8 py-3 rounded-xl font-semibold text-white shadow-md flex items-center justify-center gap-3 w-full md:w-auto mx-auto">
-                <FaWhatsapp className="text-xl" /> Confirm & Send via WhatsApp
+                 Confirm & Send via WhatsApp
               </button>
             </div>
           </div>
@@ -155,7 +155,7 @@ Total: ₦${(bookedCar.price * days).toLocaleString()}
 
                 <div className="mt-4 flex justify-between items-center">
                   <p className="text-gray-300"><span className="text-blue-400 font-bold">₦{carItem.price.toLocaleString()}</span>/day</p>
-                  <button onClick={() => handleBook(carItem)} className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-semibold flex items-center gap-2"><FaWhatsapp /> Rent Now</button>
+                  <button onClick={() => handleBook(carItem)} className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-semibold flex items-center gap-2"> Rent Now</button>
                 </div>
               </div>
             </div>
