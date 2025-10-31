@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../../Context/AuthContext";
+import { assets } from "../../assets/assets";
 import {
   FaWhatsapp,
   FaCalendarAlt,
@@ -12,10 +13,10 @@ import {
 } from "react-icons/fa";
 
 const CARS = [
-  { id: 1, name: "Toyota Prado", price: 150000, passengers: 5, transmission: "Auto", airCondition: true, doors: 4, rating: 4.8, reviews: 210, image: "/assets/pradojeep.jpg" },
-  { id: 2, name: "Mercedes G-Wagon", price: 350000, passengers: 5, transmission: "Auto", airCondition: true, doors: 4, rating: 4.9, reviews: 320, image: "/images/gwagon.jpg" },
-  { id: 3, name: "Lexus RX 350", price: 180000, passengers: 5, transmission: "Auto", airCondition: true, doors: 4, rating: 4.7, reviews: 185, image: "/images/lexus.jpg" },
-  { id: 4, name: "Range Rover Vogue", price: 400000, passengers: 5, transmission: "Auto", airCondition: true, doors: 4, rating: 4.9, reviews: 450, image: "/images/range.jpg" },
+  { id: 1, name: "Toyota Prado", price: 150000, passengers: 5, transmission: "Auto", airCondition: true, doors: 4, rating: 4.8, reviews: 210, image: assets.pradojeep },
+  { id: 2, name: "landcruiser", price: 350000, passengers: 5, transmission: "Auto", airCondition: true, doors: 4, rating: 4.9, reviews: 320, image: assets.landcruiser },
+  { id: 3, name: "Lexus RX 350", price: 180000, passengers: 5, transmission: "Auto", airCondition: true, doors: 4, rating: 4.7, reviews: 185, image: assets.lexus },
+  { id: 4, name: "Range Rover Vogue", price: 400000, passengers: 5, transmission: "Auto", airCondition: true, doors: 4, rating: 4.9, reviews: 450, image: assets.Range },
 ];
 
 const Logistics = () => {
