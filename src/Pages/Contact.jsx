@@ -131,7 +131,7 @@ const Contact = () => {
       <section className="py-12 px-6 md:px-12 lg:px-24">
         <div className="max-w-7xl mx-auto bg-[#0b0b25] border border-[#142235] rounded-2xl p-6 text-center">
           <h5 className="text-lg font-bold text-white mb-2">Need a tailored solution?</h5>
-          <p className="text-gray-300 mb-4">Contact our enterprise team for API/partnership enquiries.</p>
+          <p className="text-gray-300 mb-4">Contact our enterprise team for/partnership enquiries.</p>
           <a href="mailto:support@jiboltd.com" className="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-full text-white font-semibold">Contact Sales</a>
         </div>
       </section>

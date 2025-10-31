@@ -36,7 +36,7 @@ const Finance = () => {
     { name: "eur", symbol: "€" },
     { name: "gbp", symbol: "£" },
     { name: "ngn", symbol: "₦" },
-    { name: "inr", symbol: "₹" },
+  
   ];
 
   useEffect(() => {
