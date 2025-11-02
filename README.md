@@ -1,4 +1,4 @@
-### 🚗 JIBO Limited — Smart Vehicle rental & crypto finance Platform
+###  JIBO Limited — Smart Vehicle Rental & Crypto Finance Platform
 
 JIBO Limited is a modern vehicle rental and logistics platform that allows users to rent vehicles, calculate transport costs, access finance services, and chat with an intelligent AI assistant. Built with a mobile-first UI, Firebase authentication, and Gemini AI chatbot.
 
