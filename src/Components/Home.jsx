@@ -1,15 +1,18 @@
-// src/Pages/Home.jsx
+
 import React, { useContext } from "react";
 import Navbar from "../Components/Navbar";
 import { Coincontext } from "../Context/Coincontext";
 import { assets } from "../assets/assets";
+import { useNavigate } from "react-router-dom";
 
 
 const Home = () => {
   const { allCoin = [], Currency = { symbol: "₦" } } = useContext(Coincontext);
 
+  const navigate = useNavigate()
+
   const cryptoStats = [
-    { id: "c1", value: "₦300M+", label: "Transactions processed", icon: "₦" },
+    { id: "c1", value: "₦500M+", label: "Transactions processed", icon: "₦" },
     { id: "c2", value: "100+", label: "Trusted clients", icon: "👥" },
     { id: "c3", value: "24/7", label: "Support", icon: "🕑" },
     { id: "c4", value: "99.9%", label: "Success rate", icon: "✓" },
@@ -72,18 +75,21 @@ const Home = () => {
               <strong> smart ride booking</strong> secure, fast, and reliable.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start mt-6">
-              <a
-                href="#Booking"
-                className="border border-[#3b82f6] px-6 py-3 rounded-full hover:bg-[#3b82f6] hover:text-white transition font-medium text-center"
-              >
-                Book a Ride
-              </a>
-              <a
-                href="#Crypto"
+
+              <button
+                 onClick={()=>navigate(`/Logistics`)}  
+              className="border border-[#3b82f6] px-6 py-3 rounded-full hover:bg-[#3b82f6] hover:text-white transition font-medium text-center">
+                    Book a Ride
+              </button>
+             
+              
+            
+              <button
+                onClick={()=>navigate(`/Finance`)}
                 className="bg-[#3b82f6] px-6 py-3 rounded-full text-white hover:bg-[#2563eb] transition font-medium text-center"
               >
                 Crypto Exchange
-              </a>
+              </button>
             </div>
           </div>
 
@@ -201,7 +207,7 @@ const Home = () => {
             </details>
             <details className="bg-[#071224] border border-[#142235] rounded-lg p-4">
               <summary className="font-semibold text-white cursor-pointer">Is my data secure?</summary>
-              <p className="text-gray-300 mt-2">Yes — we prioritise security and use best practices for user data and authentication.</p>
+              <p className="text-gray-300 mt-2">Yes  we prioritise security and use best practices for user data and authentication.</p>
             </details>
           </div>
         </div>

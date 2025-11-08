@@ -58,7 +58,7 @@ Days: ${days}
 Price per Day: ₦${bookedCar.price.toLocaleString()}
 Total: ₦${(bookedCar.price * days).toLocaleString()}
 
-✅ Please confirm your booking with Jibo Logistics.`;
+ Please confirm your booking with Jibo Logistics.`;
 
     const whatsappUrl = `https://wa.me/2349069937105?text=${encodeURIComponent(msg)}`;
     window.open(whatsappUrl, "_blank");
@@ -71,7 +71,7 @@ Total: ₦${(bookedCar.price * days).toLocaleString()}
         <div className="absolute inset-0 bg-[#0b1020]" />
         <div className="relative z-10 mt-20 text-center max-w-2xl">
           <h1 className="text-5xl font-extrabold  text-white mb-4">Premium Car Rentals & Airport Pickups</h1>
-          <p className="text-gray-300 mb-6 text-lg">Book your ride across Lagos in minutes — luxury, comfort, and reliability guaranteed.</p>
+          <p className="text-gray-300 mb-6 text-lg">Book your ride across Lagos in minutes  luxury, comfort, and reliability guaranteed.</p>
           <a href="#booking" className="bg-blue-600 hover:bg-blue-700 px-8 py-3 rounded-xl font-semibold text-white shadow-md">Book a Ride</a>
         </div>
       </section>

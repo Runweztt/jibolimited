@@ -1,8 +1,9 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { assets } from "../assets/assets"; // optional: remove if you don't have assets.js
+
+import { Link, useNavigate } from "react-router-dom";
+import { assets } from "../assets/assets"; 
 
 const About = () => {
+  
   return (
     <div className="min-h-screen bg-[#0b1020] text-gray-200 font-inter">
       {/* HERO */}
@@ -52,7 +53,7 @@ const About = () => {
 
             <div className="mt-6 grid grid-cols-3 gap-3 text-sm text-gray-400">
               <div className="bg-[#071224] p-4 rounded-lg border border-[#142235]">
-                <div className="font-semibold text-white">300M+</div>
+                <div className="font-semibold text-white">500M+</div>
                 <div className="text-gray-400">Transactions processed</div>
               </div>
               <div className="bg-[#071224] p-4 rounded-lg border border-[#142235]">
@@ -90,11 +91,11 @@ const About = () => {
             },
             {
               title: "Our Vision",
-              text: "To become the leading digital ecosystem connecting finance, logistics, and lifestyle — making innovation accessible to everyone."
+              text: "To become the leading digital ecosystem connecting finance, logistics, and lifestyle  making innovation accessible to everyone."
             },
             {
               title: "Our Values",
-              text: "Integrity, innovation, and inclusivity — technology should empower people and businesses to grow confidently."
+              text: "Integrity, innovation, and inclusivity  technology should empower people and businesses to grow confidently."
             }
           ].map((card, i) => (
             <div key={i} className="bg-[#071224] border border-[#142235] rounded-2xl p-6">
@@ -112,7 +113,7 @@ const About = () => {
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               { name: "Jite Majemite", role: "founder & Ceo" },
-                { name: "Emmanuel Amarikwa", role: " Head of Data" },
+                { name: "Emmanuel Amarikwa", role: " Coo" },
               { name: "Salome Kenneth", role: "Research & Operations" },
               { name: "Eniola John", role: "HR & People Ops" },
              
@@ -144,7 +145,7 @@ const About = () => {
             </details>
             <details className="bg-[#071224] border border-[#142235] rounded-lg p-4">
               <summary className="font-semibold text-white cursor-pointer">Is my data secure?</summary>
-              <p className="text-gray-300 mt-2">Yes — we prioritise security and use best practices for user data and authentication.</p>
+              <p className="text-gray-300 mt-2">Yes we prioritise security and use best practices for user data and authentication.</p>
             </details>
           </div>
         </div>

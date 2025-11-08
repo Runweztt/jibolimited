@@ -84,7 +84,7 @@ const Navbar = () => {
             </button>
           ) : (
             <button
-              onClick={() => navTo("/login")}
+              onClick={() => {navTo("/login"); scrollTo(0,0)}}
               className="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-full text-white font-semibold transition"
             >
               Sign In
@@ -147,7 +147,7 @@ const Navbar = () => {
             {NAV_LINKS.map((link) => (
               <li key={link.name}>
                 <button
-                  onClick={() => navTo(link.path)}
+                  onClick={() => {navTo(link.path); scrollTo(0,0)}}
                   className="w-full text-left text-lg font-medium hover:text-blue-400 transition"
                 >
                   {link.name}
@@ -167,13 +167,13 @@ const Navbar = () => {
             ) : (
               <div className="flex flex-col gap-3">
                 <button
-                  onClick={() => navTo("/login")}
+                  onClick={() => {navTo("/login"); scrollTo(0,0)}}
                   className="w-full bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-full text-white font-semibold transition"
                 >
                   Sign In
                 </button>
                 <button
-                  onClick={() => navTo("/register")}
+                  onClick={() => {navTo("/register"); scrollTo(0,0)}}
                   className="w-full border border-blue-600 text-blue-400 px-4 py-2 rounded-full font-semibold transition"
                 >
                   Register
