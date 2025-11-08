@@ -77,7 +77,7 @@ const Home = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start mt-6">
 
               <button
-                 onClick={()=>navigate(`/Logistics`)}  
+                 onClick={()=>{navigate(`/Logistics`);scrollTo(0,0)}}  
               className="border border-[#3b82f6] px-6 py-3 rounded-full hover:bg-[#3b82f6] hover:text-white transition font-medium text-center">
                     Book a Ride
               </button>
@@ -85,7 +85,7 @@ const Home = () => {
               
             
               <button
-                onClick={()=>navigate(`/Finance`)}
+                onClick={()=>{navigate(`/Finance`); scrollTo(0,0)}}
                 className="bg-[#3b82f6] px-6 py-3 rounded-full text-white hover:bg-[#2563eb] transition font-medium text-center"
               >
                 Crypto Exchange
