@@ -1,4 +1,4 @@
-### 🚗 JIBO Limited — Smart Vehicle rental & crypto finance Platform
+###  JIBO Limited — Smart Vehicle Rental & Crypto Finance Platform
 
 JIBO Limited is a modern vehicle rental and logistics platform that allows users to rent vehicles, calculate transport costs, access finance services, and chat with an intelligent AI assistant. Built with a mobile-first UI, Firebase authentication, and Gemini AI chatbot.
 
@@ -63,40 +63,6 @@ JIBO Limited is a modern vehicle rental and logistics platform that allows users
 
 ---
 
-##  Environment Variables
-
-Create `.env` in root:
-
-frontend/
- ├── public/
- ├── src/
- │   ├── assets/
- │   ├── chat/
- │   ├── Components/
- │   │   ├── Navbar.jsx
- │   │   ├── Footer.jsx
- │   │   └── ProtectedRoute.jsx
- │   ├── Context/
- │   │   ├── AuthContext.jsx
- │   │   └── Coincontext.jsx
- │   ├── Pages/
- │   │   ├── Auth/
- │   │   │   ├── Login.jsx
- │   │   │   └── Register.jsx
- │   │   ├── Finance/
- │   │   │   └── Finance.jsx
- │   │   ├── Logistics/
- │   │   │   └── Logistics.jsx
- │   │   ├── About.jsx
- │   │   ├── Contact.jsx
- │   │   ├── Jibochatbot.jsx
- │   │   └── Home.jsx
- │   ├── App.jsx
- │   ├── App.css
- │   ├── Firebase.js
- │   ├── Companyinfo.js
- │   ├── index.css
- │   └── main.jsx
 
 
 ##  Roadmap / Future Enhancements
