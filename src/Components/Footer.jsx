@@ -55,7 +55,7 @@ const Footer = () => {
               Company
             </h3>
             <ul className="space-y-1.5 text-sm">
-              {["Home", "About Us", "Finance", "Logistics", "Contact"].map(
+              {["Home", "About Us", "Crypto", "Book Ride", "Contact"].map(
                 (item, idx) => (
                   <li key={idx}>
                     <a
@@ -81,12 +81,10 @@ const Footer = () => {
                 support@jiboltd.com
               </li>
               <li>
-                <strong className="text-gray-200">Phone:</strong> +44 20 7123
-                4567
+                <strong className="text-gray-200">Phone:</strong> 08130278863, 02014531128
               </li>
               <li>
-                <strong className="text-gray-200">Address:</strong> 22 Fleet
-                Street, London, EC4Y 1AA, UK
+                <strong className="text-gray-200">Address:</strong> Suite 910, 9th Floor, 8/10 Broad Street, Western House, Lagos Island, Lagos
               </li>
             </ul>
 

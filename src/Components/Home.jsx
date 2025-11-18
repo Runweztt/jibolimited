@@ -31,10 +31,10 @@ const Home = () => {
   ];
 
   const rideCities = [
-    { id: "r1", city: "Lagos", img: "https://images.pexels.com/photos/338504/pexels-photo-338504.jpeg" },
-    { id: "r2", city: "Abuja", img: "https://images.pexels.com/photos/21014/pexels-photo.jpg" },
-    { id: "r3", city: "Kano", img: "https://images.pexels.com/photos/1037995/pexels-photo-1037995.jpeg" },
-    { id: "r4", city: "Port Harcourt", img: "https://images.pexels.com/photos/374016/pexels-photo-374016.jpeg" },
+    { id: "r1", city: "Lagos", img: assets.lagos },
+    { id: "r2", city: "Abuja", img: assets.abuja },
+    { id: "r3", city: "Delta", img: assets.delta },
+    { id: "r4", city: "Port Harcourt", img: assets.ph },
   ];
 
   return (
