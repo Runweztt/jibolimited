@@ -1,44 +1,32 @@
 name: Build and Push to Build Branch
 
 on:
-  workflow_dispatch:
   push:
     branches:
-      - main
+      - main   # change this to your default branch
 
 jobs:
-  build-and-branch:
+  build:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout main branch
         uses: actions/checkout@v3
         with:
-          ref: main
           fetch-depth: 0
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: "18"
-
-      - name: Install Dependencies
+      - name: Install dependencies
         run: npm install
 
-      - name: Build Project
+      - name: Build project
         run: npm run build
 
-      - name: Create or switch to 'build' branch
-        run: |
-          git checkout -B build
-
-      - name: Commit build output
+      - name: Push build output to build branch
         run: |
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
-          git add .
-          git commit -m "Automated build update" || echo "No changes to commit"
 
-      - name: Push to 'build' branch
-        run: |
-          git push --force-with-lease origin build
+          git checkout -B build
+          git add -f dist   # change dist → your build folder (build, public, etc)
+          git commit -m "Automated build from main" || echo "No changes to commit"
+          git push -f origin build
