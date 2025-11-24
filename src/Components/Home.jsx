@@ -186,37 +186,20 @@ const Home = () => {
       ))}
     </div>
 
-    {/* Cities */}
-    <h3 className="text-2xl font-semibold mt-12">Explore Ride Cities</h3>
-
-    <div className="overflow-x-auto pb-3">
-      <div className="flex gap-4 sm:gap-6 w-max pl-1">
-        {rideCities.map((c) => (
-          <div
-            key={c.id}
-            className="min-w-[200px] sm:min-w-[220px] bg-[#071224] rounded-lg p-4 
-                       shadow-md hover:shadow-lg transition"
-          >
-            <div className="w-full h-36 sm:h-40 rounded-md overflow-hidden mb-3">
-              <img
-                src={c.img}
-                alt={c.city}
-                className="w-full h-full object-cover"
-                loading="lazy"
-              />
-            </div>
-            <h4 className="font-semibold text-lg">{c.city}</h4>
-            <p className="text-sm text-[#9fb0d4]">
-              Popular destinations & airports
-            </p>
+          <h3 className="text-2xl font-semibold mt-12">Explore Ride Cities</h3>
+          <div className="overflow-x-auto flex gap-6 pb-4 justify-center">
+            {rideCities.map((c) => (
+              <div key={c.id} className="min-w-[220px] bg-[#071224] rounded-lg p-4 shadow-md hover:shadow-lg transition">
+                <div className="w-full h-40 rounded-md overflow-hidden mb-3">
+                  <img src={c.img} alt={c.city} className="w-full h-full object-cover" />
+                </div>
+                <h4 className="font-semibold text-lg">{c.city}</h4>
+                <p className="text-sm text-[#9fb0d4]">Popular destinations & airports</p>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-    </div>
-  </div>
-</section>
-
-      
+        </div>
+      </section>
         {/* FAQ */}
       <section className="px-6 md:px-12 lg:px-24 py-12">
         <div className="max-w-5xl mx-auto">
