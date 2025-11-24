@@ -1,20 +1,15 @@
+// Logistics.jsx
+// Public page. Only the booking actions redirect to /login when clicked by unauthenticated users.
 
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../../Context/AuthContext";
 import { assets } from "../../assets/assets";
-import {
-
-  FaCalendarAlt,
-  FaMapMarkerAlt,
-  FaCarSide,
-  FaUsers,
-  FaSnowflake,
-} from "react-icons/fa";
+import { FaCalendarAlt, FaMapMarkerAlt, FaCarSide, FaUsers, FaSnowflake } from "react-icons/fa";
 
 const CARS = [
   { id: 1, name: "Toyota Prado", price: 150000, passengers: 5, transmission: "Auto", airCondition: true, doors: 4, rating: 4.8, reviews: 210, image: assets.pradojeep },
-  { id: 2, name: "landcruiser", price: 350000, passengers: 5, transmission: "Auto", airCondition: true, doors: 4, rating: 4.9, reviews: 320, image: assets.landcruiser },
+  { id: 2, name: "Land Cruiser", price: 350000, passengers: 5, transmission: "Auto", airCondition: true, doors: 4, rating: 4.9, reviews: 320, image: assets.landcruiser },
   { id: 3, name: "Lexus RX 350", price: 180000, passengers: 5, transmission: "Auto", airCondition: true, doors: 4, rating: 4.7, reviews: 185, image: assets.lexus },
   { id: 4, name: "Range Rover Vogue", price: 400000, passengers: 5, transmission: "Auto", airCondition: true, doors: 4, rating: 4.9, reviews: 450, image: assets.Range },
 ];
@@ -29,36 +24,39 @@ const Logistics = () => {
   const [destination, setDestination] = useState("");
   const [days, setDays] = useState(1);
   const [car, setCar] = useState(CARS[0]);
-  const [total, setTotal] = useState(car.price);
+  const [total, setTotal] = useState(CARS[0].price);
   const [showAlert, setShowAlert] = useState(false);
 
   useEffect(() => {
-    setTotal(car.price * days);
+    const n = Number(days) || 1;
+    setTotal((car?.price || 0) * n);
   }, [car, days]);
 
+  // Booking action — only triggered when user clicks a button
   const handleBook = (selectedCar) => {
-    // auth guard for action
+    // Only redirect when the user clicks and is not authenticated
     if (!user) {
-      navigate("/login", { state: { from: location } });
+      // preserve the current page so Login can return the user
+      navigate("/login", { state: { from: location.pathname } });
       return;
     }
 
     const bookedCar = selectedCar || car;
-    if (!pickup || !destination || !name) {
+    if (!name.trim() || !pickup.trim() || !destination.trim()) {
       setShowAlert(true);
       return;
     }
 
-    const msg = ` *Ride Booking Details*
+    const msg = `*Ride Booking Details*
 Name: ${name}
 Pickup: ${pickup}
 Destination: ${destination}
 Car: ${bookedCar.name}
 Days: ${days}
 Price per Day: ₦${bookedCar.price.toLocaleString()}
-Total: ₦${(bookedCar.price * days).toLocaleString()}
+Total: ₦${(bookedCar.price * Number(days)).toLocaleString()}
 
- Please confirm your booking with Jibo Logistics.`;
+Please confirm your booking with Jibo Logistics.`;
 
     const whatsappUrl = `https://wa.me/2349069937105?text=${encodeURIComponent(msg)}`;
     window.open(whatsappUrl, "_blank");
@@ -70,8 +68,8 @@ Total: ₦${(bookedCar.price * days).toLocaleString()}
       <section className="relative h-[60vh] flex items-center justify-center bg-cover bg-center" style={{ backgroundImage: "url('/images/hero-car.jpg')" }}>
         <div className="absolute inset-0 bg-[#0b1020]" />
         <div className="relative z-10 mt-20 text-center max-w-2xl">
-          <h1 className="text-5xl font-extrabold  text-white mb-4">Premium Car Rentals & Airport Pickups</h1>
-          <p className="text-gray-300 mb-6 text-lg">Book your ride across Lagos in minutes  luxury, comfort, and reliability guaranteed.</p>
+          <h1 className="text-5xl font-extrabold text-white mb-4">Premium Car Rentals & Airport Pickups</h1>
+          <p className="text-gray-300 mb-6 text-lg">Book your ride across Lagos in minutes — luxury, comfort, and reliability guaranteed.</p>
           <a href="#booking" className="bg-blue-600 hover:bg-blue-700 px-8 py-3 rounded-xl font-semibold text-white shadow-md">Book a Ride</a>
         </div>
       </section>
@@ -83,31 +81,70 @@ Total: ₦${(bookedCar.price * days).toLocaleString()}
 
           {showAlert && (
             <div className="bg-red-800/50 text-red-200 border border-red-500 px-4 py-3 rounded-lg mb-6 text-center">
-               Please fill in your name, pickup, and destination before booking.
+              Please fill in your name, pickup, and destination before booking.
             </div>
           )}
 
           <div className="grid md:grid-cols-2 gap-6">
             <div>
               <label className="block text-gray-300 mb-2">Full Name</label>
-              <input value={name} onChange={(e) => setName(e.target.value)} type="text" placeholder="Your Name" className="w-full bg-transparent border border-blue-800 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-600" />
+              <input
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                type="text"
+                placeholder="Your Name"
+                className="w-full bg-transparent border border-blue-800 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-600"
+              />
             </div>
+
             <div>
               <label className="block text-gray-300 mb-2">Pickup Location</label>
-              <input value={pickup} onChange={(e) => setPickup(e.target.value)} type="text" placeholder="e.g. Ikeja City Mall" className="w-full bg-transparent border border-blue-800 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-600" />
+              <input
+                value={pickup}
+                onChange={(e) => setPickup(e.target.value)}
+                type="text"
+                placeholder="e.g. Ikeja City Mall"
+                className="w-full bg-transparent border border-blue-800 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-600"
+              />
             </div>
+
             <div>
               <label className="block text-gray-300 mb-2">Destination</label>
-              <input value={destination} onChange={(e) => setDestination(e.target.value)} type="text" placeholder="e.g. Murtala Muhammed Airport" className="w-full bg-transparent border border-blue-800 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-600" />
+              <input
+                value={destination}
+                onChange={(e) => setDestination(e.target.value)}
+                type="text"
+                placeholder="e.g. Murtala Muhammed Airport"
+                className="w-full bg-transparent border border-blue-800 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-600"
+              />
             </div>
+
             <div>
               <label className="block text-gray-300 mb-2">Number of Days</label>
-              <input value={days} onChange={(e) => setDays(e.target.value)} type="number" min="1" className="w-full bg-transparent border border-blue-800 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-600" />
+              <input
+                value={days}
+                onChange={(e) => setDays(Number(e.target.value) || 1)}
+                type="number"
+                min="1"
+                className="w-full bg-transparent border border-blue-800 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-600"
+              />
             </div>
+
             <div>
               <label className="block text-gray-300 mb-2">Select Car</label>
-              <select value={car.id} onChange={(e) => setCar(CARS.find((c) => c.id === parseInt(e.target.value)))} className="w-full bg-transparent border border-blue-800 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-600">
-                {CARS.map((c) => (<option key={c.id} value={c.id} className="bg-[#0b0b25] text-white">{c.name} - ₦{c.price.toLocaleString()}/day</option>))}
+              <select
+                value={car.id}
+                onChange={(e) => {
+                  const selected = CARS.find((c) => c.id === parseInt(e.target.value, 10));
+                  if (selected) setCar(selected);
+                }}
+                className="w-full bg-transparent border border-blue-800 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-600"
+              >
+                {CARS.map((c) => (
+                  <option key={c.id} value={c.id}>
+                    {c.name} - ₦{c.price.toLocaleString()}/day
+                  </option>
+                ))}
               </select>
             </div>
           </div>
@@ -123,8 +160,11 @@ Total: ₦${(bookedCar.price * days).toLocaleString()}
             </div>
 
             <div className="text-center">
-              <button onClick={() => handleBook()} className="bg-blue-600 hover:bg-blue-700 px-8 py-3 rounded-xl font-semibold text-white shadow-md flex items-center justify-center gap-3 w-full md:w-auto mx-auto">
-                 Confirm & Send via WhatsApp
+              <button
+                onClick={() => handleBook()}
+                className="bg-blue-600 hover:bg-blue-700 px-8 py-3 rounded-xl font-semibold text-white shadow-md flex items-center justify-center gap-3 w-full md:w-auto mx-auto"
+              >
+                Confirm & Send via WhatsApp
               </button>
             </div>
           </div>
@@ -155,7 +195,9 @@ Total: ₦${(bookedCar.price * days).toLocaleString()}
 
                 <div className="mt-4 flex justify-between items-center">
                   <p className="text-gray-300"><span className="text-blue-400 font-bold">₦{carItem.price.toLocaleString()}</span>/day</p>
-                  <button onClick={() => handleBook(carItem)} className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-semibold flex items-center gap-2"> Rent Now</button>
+                  <button onClick={() => handleBook(carItem)} className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-semibold flex items-center gap-2">
+                    Rent Now
+                  </button>
                 </div>
               </div>
             </div>
