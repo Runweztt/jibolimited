@@ -181,7 +181,7 @@ Please confirm your booking with Jibo Logistics.`;
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {CARS.map((carItem) => (
             <div key={carItem.id} className="bg-[#0b0b25] border border-blue-800 rounded-2xl overflow-hidden shadow-lg transition transform hover:scale-[1.02]">
-              <img src={carItem.image} alt={carItem.name} className="w-full h-40 object-cover" />
+              <img src={carItem.image} alt={carItem.name} className="w-full h-40 object-cover" loading="lazy" />
               <div className="p-5">
                 <h3 className="text-lg font-semibold text-blue-400">{carItem.name}</h3>
                 <p className="text-sm text-gray-400 mt-1">⭐ {carItem.rating} ({carItem.reviews} reviews)</p>

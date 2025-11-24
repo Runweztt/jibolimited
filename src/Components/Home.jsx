@@ -100,6 +100,7 @@ const Home = () => {
               src={assets.crypto_img}
               alt="Crypto Illustration"
               className="w-full max-w-md rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.6)] floaty"
+
             />
           </div>
         </div>
@@ -201,6 +202,7 @@ const Home = () => {
                 src={c.img}
                 alt={c.city}
                 className="w-full h-full object-cover"
+                loading="lazy"
               />
             </div>
             <h4 className="font-semibold text-lg">{c.city}</h4>
