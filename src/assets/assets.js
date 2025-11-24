@@ -10,7 +10,7 @@ import  lexus from './lexus.jpeg'
 import jibo_office from './jibo_office.jpg'
 import abuja from "./abuja.jpg"
 import delta from "./delta.jpg"
-import lagos from "./lagos.jpg"
+import lagos from "./lagos.jpeg"
 import ph from "./ph.jpg"
 
 

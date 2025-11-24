@@ -30,3 +30,8 @@
 .animate-scroll-left {
   animation: scroll-left 30s linear infinite;
 }
+
+/* global.css */
+.input {
+  @apply w-full px-4 py-2 bg-transparent border border-blue-800 rounded-lg focus:ring-2 focus:ring-blue-600;
+}

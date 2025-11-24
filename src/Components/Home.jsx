@@ -32,9 +32,10 @@ const Home = () => {
 
   const rideCities = [
     { id: "r1", city: "Lagos", img: assets.lagos },
-    { id: "r2", city: "Abuja", img: assets.abuja },
+    { id: "r2", city: "London", img: assets.ph },
+    { id: "r4", city: "Abuja", img: assets.abuja },
     { id: "r3", city: "Delta", img: assets.delta },
-    { id: "r4", city: "Port Harcourt", img: assets.ph },
+    
   ];
 
   return (
@@ -162,36 +163,58 @@ const Home = () => {
       </section>
 
       {/* RIDE SECTION */}
-      <section id="Booking" className="px-5 sm:px-8 md:px-16 lg:px-24 mt-20 mb-20 fade-up">
-        <div className="max-w-7xl mx-auto text-center space-y-10">
-          <h2 className="text-3xl md:text-4xl font-bold">Book Your Ride</h2>
+        <section
+  id="Booking"
+  className="px-5 sm:px-8 md:px-16 lg:px-24 mt-20 mb-20 fade-up"
+>
+  <div className="max-w-7xl mx-auto text-center space-y-10">
+    <h2 className="text-3xl md:text-4xl font-bold">Book Your Ride</h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {rideFeatures.map((f, i) => (
-              <div
-                key={f.id}
-                className="bg-[#071224] border border-[#142235] rounded-2xl p-6 hover:shadow-xl transform hover:-translate-y-2 transition-all"
-              >
-                <h3 className="text-xl font-semibold mb-3">{f.title}</h3>
-                <p className="text-[#cbd8f2] text-sm">{f.desc}</p>
-              </div>
-            ))}
-          </div>
-
-          <h3 className="text-2xl font-semibold mt-12">Explore Ride Cities</h3>
-          <div className="overflow-x-auto flex gap-6 pb-4 justify-center">
-            {rideCities.map((c) => (
-              <div key={c.id} className="min-w-[220px] bg-[#071224] rounded-lg p-4 shadow-md hover:shadow-lg transition">
-                <div className="w-full h-40 rounded-md overflow-hidden mb-3">
-                  <img src={c.img} alt={c.city} className="w-full h-full object-cover" />
-                </div>
-                <h4 className="font-semibold text-lg">{c.city}</h4>
-                <p className="text-sm text-[#9fb0d4]">Popular destinations & airports</p>
-              </div>
-            ))}
-          </div>
+    {/* Feature Cards */}
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      {rideFeatures.map((f) => (
+        <div
+          key={f.id}
+          className="bg-[#071224] border border-[#142235] rounded-2xl p-5 sm:p-6 
+                     hover:shadow-xl transform hover:-translate-y-2 transition-all 
+                     text-left sm:text-center"
+        >
+          <h3 className="text-lg sm:text-xl font-semibold mb-3">{f.title}</h3>
+          <p className="text-[#cbd8f2] text-sm leading-relaxed">{f.desc}</p>
         </div>
-      </section>
+      ))}
+    </div>
+
+    {/* Cities */}
+    <h3 className="text-2xl font-semibold mt-12">Explore Ride Cities</h3>
+
+    <div className="overflow-x-auto pb-3">
+      <div className="flex gap-4 sm:gap-6 w-max pl-1">
+        {rideCities.map((c) => (
+          <div
+            key={c.id}
+            className="min-w-[200px] sm:min-w-[220px] bg-[#071224] rounded-lg p-4 
+                       shadow-md hover:shadow-lg transition"
+          >
+            <div className="w-full h-36 sm:h-40 rounded-md overflow-hidden mb-3">
+              <img
+                src={c.img}
+                alt={c.city}
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <h4 className="font-semibold text-lg">{c.city}</h4>
+            <p className="text-sm text-[#9fb0d4]">
+              Popular destinations & airports
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+      
         {/* FAQ */}
       <section className="px-6 md:px-12 lg:px-24 py-12">
         <div className="max-w-5xl mx-auto">
