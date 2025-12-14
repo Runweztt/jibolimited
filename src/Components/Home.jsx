@@ -64,8 +64,8 @@ const Home = () => {
       </div>
 
       {/* HERO SECTION */}
-      <header className="pt-36 pb-16 mt-20 px-5 sm:px-8 md:px-16 lg:px-24 fade-up">
-        <div className="max-w-7xl mx-auto flex flex-col-reverse md:flex-row items-center gap-10 md:gap-20">
+      <header className="pt-36 pb-16 mt-20 px-6 md:px-12 lg:px-24 fade-up">
+        <div className="max-w-7xl mx-auto flex flex-col-reverse md:flex-row items-center gap-10 md:gap-16">
           {/* Text Side */}
           <div className="flex-1 text-center md:text-left space-y-6">
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight">
@@ -79,7 +79,7 @@ const Home = () => {
 
               <button
                  onClick={()=>{navigate(`/Logistics`);scrollTo(0,0)}}  
-              className="border border-[#3b82f6] px-6 py-3 rounded-full hover:bg-[#3b82f6] hover:text-white transition font-medium text-center">
+              className="border border-[#3b82f6] px-6 py-2.5 rounded-full hover:bg-[#3b82f6] hover:text-white transition font-medium text-center">
                     Book a Ride
               </button>
              
@@ -87,7 +87,7 @@ const Home = () => {
             
               <button
                 onClick={()=>{navigate(`/Finance`); scrollTo(0,0)}}
-                className="bg-[#3b82f6] px-6 py-3 rounded-full text-white hover:bg-[#2563eb] transition font-medium text-center"
+                className="bg-[#3b82f6] px-6 py-2.5 rounded-full text-white hover:bg-[#2563eb] transition font-medium text-center"
               >
                 Crypto Exchange
               </button>
@@ -107,8 +107,8 @@ const Home = () => {
       </header>
 
       {/* CRYPTO TICKER */}
-      <section className="bg-[#0d132a] border-y border-[#142235] py-4 fade-up">
-        <div className="max-w-7xl mx-auto px-5 sm:px-8 md:px-16 lg:px-24 overflow-hidden">
+      <section className="bg-[#071224] border-y border-[#142235] py-4 fade-up">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-24 overflow-hidden">
           <div className="flex gap-8 whitespace-nowrap items-center ticker-scroll">
             {[...allCoin.slice(0, 10), ...allCoin.slice(0, 10)].map((coin, i) => (
               <div key={coin?.id ?? i} className="flex items-center gap-3 px-3">
@@ -127,7 +127,7 @@ const Home = () => {
       </section>
 
       {/* CRYPTO SECTION */}
-      <section id="Crypto" className="px-5 sm:px-8 md:px-16 lg:px-24 mt-20 fade-up">
+      <section id="Crypto" className="px-6 md:px-12 lg:px-24 py-16 fade-up">
         <div className="max-w-7xl mx-auto text-center space-y-10">
           <h2 className="text-3xl md:text-4xl font-bold">Crypto Trading Highlights</h2>
 
@@ -139,11 +139,11 @@ const Home = () => {
                 className="bg-[#071224] border border-[#142235] p-6 rounded-xl hover:shadow-lg transition-all"
                 style={{ animationDelay: `${idx * 120}ms` }}
               >
-                <div className="w-14 h-14 mx-auto mb-3 rounded-full flex items-center justify-center bg-[#08182b] text-[#3b82f6] font-bold text-xl">
+                <div className="w-14 h-14 mx-auto mb-3 rounded-full flex items-center justify-center bg-[#0b0b25] text-blue-400 font-bold text-xl">
                   {s.icon}
                 </div>
                 <p className="text-2xl font-semibold">{s.value}</p>
-                <p className="text-sm text-[#cbd8f2]">{s.label}</p>
+                <p className="text-sm text-gray-300">{s.label}</p>
               </div>
             ))}
           </div>
@@ -156,7 +156,7 @@ const Home = () => {
                 className="bg-[#071224] border border-[#142235] rounded-2xl p-6 hover:shadow-xl transform hover:-translate-y-2 transition-all"
               >
                 <h3 className="text-xl font-semibold mb-3">{f.title}</h3>
-                <p className="text-[#cbd8f2] text-sm">{f.desc}</p>
+                <p className="text-gray-300 text-sm">{f.desc}</p>
               </div>
             ))}
           </div>
@@ -166,7 +166,7 @@ const Home = () => {
       {/* RIDE SECTION */}
         <section
   id="Booking"
-  className="px-5 sm:px-8 md:px-16 lg:px-24 mt-20 mb-20 fade-up"
+  className="px-6 md:px-12 lg:px-24 py-16 fade-up"
 >
   <div className="max-w-7xl mx-auto text-center space-y-10">
     <h2 className="text-3xl md:text-4xl font-bold">Book Your Ride</h2>
@@ -181,20 +181,21 @@ const Home = () => {
                      text-left sm:text-center"
         >
           <h3 className="text-lg sm:text-xl font-semibold mb-3">{f.title}</h3>
-          <p className="text-[#cbd8f2] text-sm leading-relaxed">{f.desc}</p>
+          <p className="text-gray-300 text-sm leading-relaxed">{f.desc}</p>
         </div>
       ))}
     </div>
 
-          <h3 className="text-2xl font-semibold mt-12">Explore Ride Cities</h3>
-          <div className="overflow-x-auto flex gap-6 pb-4 justify-center">
+
+          <h3 className="text-2xl font-semibold mt-12 mb-6">Explore Ride Cities</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {rideCities.map((c) => (
-              <div key={c.id} className="min-w-[220px] bg-[#071224] rounded-lg p-4 shadow-md hover:shadow-lg transition">
-                <div className="w-full h-40 rounded-md overflow-hidden mb-3">
+              <div key={c.id} className="bg-[#071224] border border-[#142235] rounded-2xl p-5 shadow-md hover:shadow-xl transform hover:-translate-y-2 transition-all">
+                <div className="w-full h-40 rounded-lg overflow-hidden mb-3">
                   <img src={c.img} alt={c.city} className="w-full h-full object-cover" />
                 </div>
-                <h4 className="font-semibold text-lg">{c.city}</h4>
-                <p className="text-sm text-[#9fb0d4]">Popular destinations & airports</p>
+                <h4 className="font-semibold text-lg text-white">{c.city}</h4>
+                <p className="text-sm text-gray-400 mt-1">Popular destinations & airports</p>
               </div>
             ))}
           </div>

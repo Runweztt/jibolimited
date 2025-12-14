@@ -1,18 +1,29 @@
-
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getAnalytics, isSupported } from "firebase/analytics";
 
+// TEST: Log ALL environment variables
+console.log("ALL ENV VARS:", import.meta.env);
+
+// Debug logging
+console.log("Environment variables:", {
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+});
+
 const firebaseConfig = {
-  apiKey: "AIzaSyBiA31-0TemOLfvAWAWGC--2DFSLZQ-Mcw",
-  authDomain: "marketing-program-cf060.firebaseapp.com",
-  projectId: "marketing-program-cf060",
-  storageBucket: "marketing-program-cf060.appspot.com",
-  messagingSenderId: "360799407774",
-  appId: "1:360799407774:web:57be443cf0a4a7519bf58f",
-  measurementId: "G-ZHKJQ66CZ7",
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 };
+
+console.log("Firebase Config:", firebaseConfig);
 
 const app = initializeApp(firebaseConfig);
 

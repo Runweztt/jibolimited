@@ -36,7 +36,7 @@ const About = () => {
       </section>
 
       {/* WHO WE ARE + IMAGE */}
-      <section className="px-6 md:px-12 lg:px-24 py-12">
+      <section className="px-6 md:px-12 lg:px-24 py-16">
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
           <div>
             <h2 className="text-3xl font-bold text-white mb-4">Who We Are</h2>
@@ -82,7 +82,7 @@ const About = () => {
       </section>
 
       {/* Mission / Vision / Values */}
-      <section className="px-6 md:px-12 lg:px-24 py-12">
+      <section className="px-6 md:px-12 lg:px-24 py-16">
         <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-6">
           {[
             {
@@ -107,7 +107,7 @@ const About = () => {
       </section>
 
       {/* Team / Highlights */}
-      <section className="px-6 md:px-12 lg:px-24 py-12 border-t border-[#142235]">
+      <section className="px-6 md:px-12 lg:px-24 py-16 border-t border-[#142235]">
         <div className="max-w-7xl mx-auto">
           <h3 className="text-2xl font-bold text-white mb-6">Leadership & Team</h3>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -131,7 +131,7 @@ const About = () => {
       </section>
 
       {/* FAQ */}
-      <section className="px-6 md:px-12 lg:px-24 py-12">
+      <section className="px-6 md:px-12 lg:px-24 py-16">
         <div className="max-w-5xl mx-auto">
           <h4 className="text-xl font-bold text-white mb-4">Frequently asked questions</h4>
           <div className="space-y-3">

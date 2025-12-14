@@ -112,7 +112,7 @@ const Finance = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0b1020] text-white px-4 sm:px-8 md:px-12 py-10">
+    <div className="min-h-screen bg-[#0b1020] text-white px-6 md:px-12 lg:px-24 py-10">
 
       {/* Hero Section */}
       <div className="text-center mt-20 mb-10">
@@ -165,7 +165,7 @@ const Finance = () => {
 
         <button
           onClick={() => handleTrade(selectedCoin)}
-          className="mt-5 bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-xl font-semibold"
+          className="mt-5 bg-blue-600 hover:bg-blue-700 px-6 py-2.5 rounded-xl font-semibold"
         >
           Trade now
         </button>

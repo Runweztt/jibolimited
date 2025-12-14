@@ -11,6 +11,7 @@ import Register from "./Pages/Auth/Register";
 import Footer from "./Components/Footer";
 import Jibochatbot from "./Pages/Jibochatbot";
 import { AuthProvider } from "./Context/AuthContext";
+import ProtectedRoute from "./Components/ProtectedRoute";
 
 const App = () => (
   <div className="font-sans bg-gray-950 text-white min-h-screen">
@@ -23,9 +24,17 @@ const App = () => (
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
 
-        {/* PUBLIC: finance and logistics must be public pages */}
-        <Route path="/finance" element={<Finance />} />
-        <Route path="/logistics" element={<Logistics />} />
+        {/* PROTECTED: finance and logistics must be private pages */}
+        <Route path="/finance" element={
+          <ProtectedRoute>
+            <Finance />
+          </ProtectedRoute>
+        } />
+        <Route path="/logistics" element={
+          <ProtectedRoute>
+            <Logistics />
+          </ProtectedRoute>
+        } />
 
         {/* auth */}
         <Route path="/login" element={<Login />} />

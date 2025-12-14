@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { assets } from "../assets/assets";
 import { useAuth } from "../Context/AuthContext";
 
 const NAV_LINKS = [
   { name: "Home", path: "/" },
   { name: "About", path: "/about" },
-  { name: "Contact", path: "/contact" },
   { name: "Crypto", path: "/finance" },
   { name: "Book Ride", path: "/logistics" },
+  { name: "Contact", path: "/contact" },
 ];
 
 const Navbar = () => {
@@ -42,11 +42,15 @@ const Navbar = () => {
   const navTo = (path) => {
     navigate(path);
     setShowMobileMenu(false);
+    // Scroll to top after navigation
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 100);
   };
 
   return (
-    <header className="fixed top-0 left-0 w-full z-[100] bg-[#0b1020]/90 shadow-md">
-      <div className="flex items-center justify-between py-4 px-6 md:px-10 lg:px-20">
+    <header className="fixed top-0 left-0 w-full z-[100] bg-[#0b1020]/90 backdrop-blur-md shadow-md">
+      <div className="flex items-center justify-between py-3 px-6 md:px-10 lg:px-20">
         {/* Logo */}
         <button
           onClick={() => navTo("/")}
@@ -55,7 +59,7 @@ const Navbar = () => {
           <img
             src={assets.logo}
             alt="Jibo logo"
-            className="w-18 md:w-20"
+            className="w-12 md:w-14"
             onError={(e) => (e.target.style.display = "none")}
           />
         </button>
@@ -63,29 +67,29 @@ const Navbar = () => {
         {/* Desktop Links */}
         <nav className="hidden md:flex gap-8 text-white font-medium">
           {NAV_LINKS.map((link) => (
-            <Link
+            <button
               key={link.name}
-              to={link.path}
+              onClick={() => navTo(link.path)}
               className="hover:text-blue-400 transition"
             >
               {link.name}
-            </Link>
+            </button>
           ))}
         </nav>
-
+        
         {/* Desktop Auth Buttons */}
         <div className="hidden md:block">
           {user ? (
             <button
               onClick={handleLogout}
-              className="bg-red-600 hover:bg-red-700 px-6 py-2 rounded-full text-white font-semibold transition"
+              className="bg-red-600 hover:bg-red-700 px-6 py-2.5 rounded-full text-white font-semibold transition"
             >
               Logout
             </button>
           ) : (
             <button
-              onClick={() => {navTo("/login"); scrollTo(0,0)}}
-              className="bg-blue-600 hover:bg-blue-700 px-6 py-2 rounded-full text-white font-semibold transition"
+              onClick={() => navTo("/login")}
+              className="bg-blue-600 hover:bg-blue-700 px-6 py-2.5 rounded-full text-white font-semibold transition"
             >
               Sign In
             </button>
@@ -147,7 +151,7 @@ const Navbar = () => {
             {NAV_LINKS.map((link) => (
               <li key={link.name}>
                 <button
-                  onClick={() => {navTo(link.path); scrollTo(0,0)}}
+                  onClick={() => navTo(link.path)}
                   className="w-full text-left text-lg font-medium hover:text-blue-400 transition"
                 >
                   {link.name}
@@ -160,21 +164,21 @@ const Navbar = () => {
             {user ? (
               <button
                 onClick={handleLogout}
-                className="w-full bg-red-600 hover:bg-red-700 px-4 py-2 rounded-full text-white font-semibold transition"
+                className="w-full bg-red-600 hover:bg-red-700 px-5 py-2 rounded-full text-white font-semibold transition"
               >
                 Logout
               </button>
             ) : (
               <div className="flex flex-col gap-3">
                 <button
-                  onClick={() => {navTo("/login"); scrollTo(0,0)}}
-                  className="w-full bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-full text-white font-semibold transition"
+                  onClick={() => navTo("/login")}
+                  className="w-full bg-blue-600 hover:bg-blue-700 px-5 py-2 rounded-full text-white font-semibold transition"
                 >
                   Sign In
                 </button>
                 <button
-                  onClick={() => {navTo("/register"); scrollTo(0,0)}}
-                  className="w-full border border-blue-600 text-blue-400 px-4 py-2 rounded-full font-semibold transition"
+                  onClick={() => navTo("/register")}
+                  className="w-full border border-blue-600 text-blue-400 px-5 py-2 rounded-full font-semibold transition"
                 >
                   Register
                 </button>

@@ -1,14 +1,42 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
 @import "tailwindcss";
-*{
+
+* {
   font-family: outfit;
+}
+
+/* Smooth scrolling for the entire page */
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+/* Hide scrollbars for all browsers */
+::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+  display: none;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: transparent;
 }
 
 @keyframes scroll-right {
   0% {
     transform: translateX(-100%);
   }
+
   100% {
     transform: translateX(100%);
   }
@@ -18,6 +46,7 @@
   0% {
     transform: translateX(100%);
   }
+
   100% {
     transform: translateX(-100%);
   }
@@ -31,7 +60,7 @@
   animation: scroll-left 30s linear infinite;
 }
 
-/* global.css */
+/* Standardized input styling with improved focus states */
 .input {
-  @apply w-full px-4 py-2 bg-transparent border border-blue-800 rounded-lg focus:ring-2 focus:ring-blue-600;
+  @apply w-full px-4 py-2 bg-transparent border border-blue-800 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-blue-600 focus:outline-none transition-all duration-200;
 }

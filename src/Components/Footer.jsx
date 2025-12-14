@@ -5,14 +5,14 @@ const Footer = () => {
   return (
     <footer className="bg-[#071224] text-gray-300">
       {/* === CTA Section === */}
-      <section className="py-10 px-6 sm:px-10  md:px-16 lg:px-24 border-b border-[#142235]">
+      <section className="py-10 px-6 md:px-12 lg:px-24 border-b border-[#142235]">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-5 text-center sm:text-left">
           <div>
             <h2 className="text-xl sm:text-2xl font-semibold text-white">
               Ready to get started?
             </h2>
             <p className="text-[#cbd8f2] text-sm mt-1">
-              Join Jibo today — trade crypto or book your first ride instantly.
+              Join Jibo today  trade crypto or book your first ride instantly.
             </p>
           </div>
 
@@ -34,7 +34,7 @@ const Footer = () => {
       </section>
 
       {/* === Main Footer === */}
-      <div className="px-6 sm:px-10 mt-15 md:px-16 lg:px-24 py-10">
+      <div className="px-6 md:px-12 lg:px-24 py-10">
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Left Section */}
           <div>
@@ -45,7 +45,7 @@ const Footer = () => {
             />
             <p className="text-sm text-gray-400 max-w-xs leading-relaxed">
               Jibo Limited empowers users with smart crypto exchange, digital
-              finance, and mobility services — all in one ecosystem.
+              finance, and mobility services all in one ecosystem.
             </p>
           </div>
 
