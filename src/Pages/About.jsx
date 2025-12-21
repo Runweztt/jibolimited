@@ -13,8 +13,8 @@ const About = () => {
             About Jibo Limited
           </h1>
           <p className="text-gray-300 max-w-3xl mx-auto text-lg md:text-xl">
-            Empowering businesses and individuals with innovative financial and mobility solutions.
-            We combine modern technology with real-world services to simplify finance, logistics,
+            Empowering businesses and individuals with innovative financial solutions.
+            We combine modern technology with real-world services to simplify finance
             and everyday transactions.
           </p>
 
@@ -24,12 +24,6 @@ const About = () => {
               className="inline-block bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-full font-semibold"
             >
               Create Account
-            </Link>
-            <Link
-              to="/logistics"
-              className="inline-block border border-blue-600 text-blue-400 px-6 py-3 rounded-full font-semibold"
-            >
-              Book a Ride
             </Link>
           </div>
         </div>
@@ -42,13 +36,12 @@ const About = () => {
             <h2 className="text-3xl font-bold text-white mb-4">Who We Are</h2>
             <p className="text-gray-300 leading-relaxed mb-4">
               Founded on transparency, efficiency, and innovation, <strong>Jibo Limited</strong> provides
-              digital finance and logistics services that empower users to manage assets, make payments,
-              and access transportation seamlessly.
+              digital finance services that empower users to manage assets, make payments,
+              and access financial tools seamlessly.
             </p>
             <p className="text-gray-300 leading-relaxed">
-              Our platform bridges the gap between <strong>crypto finance</strong> and{" "}
-              <strong>real-world mobility</strong>, offering users a unique ecosystem where technology
-              meets convenience.
+              Our platform focuses on <strong>crypto finance</strong>,
+              offering users a unique ecosystem where technology meets convenience.
             </p>
 
             <div className="mt-6 grid grid-cols-3 gap-3 text-sm text-gray-400">
@@ -91,7 +84,7 @@ const About = () => {
             },
             {
               title: "Our Vision",
-              text: "To become the leading digital ecosystem connecting finance, logistics, and lifestyle  making innovation accessible to everyone."
+              text: "To become the leading digital ecosystem connecting finance and lifestyle  making innovation accessible to everyone."
             },
             {
               title: "Our Values",
@@ -139,10 +132,7 @@ const About = () => {
               <summary className="font-semibold text-white cursor-pointer">How do I start trading crypto?</summary>
               <p className="text-gray-300 mt-2">Create an account, verify, then use our Finance page to browse coins and hit the Trade button.</p>
             </details>
-            <details className="bg-[#071224] border border-[#142235] rounded-lg p-4">
-              <summary className="font-semibold text-white cursor-pointer">How do I book a ride?</summary>
-              <p className="text-gray-300 mt-2">Visit Logistics, choose a vehicle and fill booking details. Confirming opens WhatsApp to finalise the booking.</p>
-            </details>
+
             <details className="bg-[#071224] border border-[#142235] rounded-lg p-4">
               <summary className="font-semibold text-white cursor-pointer">Is my data secure?</summary>
               <p className="text-gray-300 mt-2">Yes we prioritise security and use best practices for user data and authentication.</p>

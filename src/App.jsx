@@ -5,7 +5,6 @@ import Home from "./Components/Home";
 import About from "./Pages/About";
 import Contact from "./Pages/Contact";
 import Finance from "./Pages/Finance/Finance";
-import Logistics from "./Pages/Logistics/Logistics";
 import Login from "./Pages/Auth/Login";
 import Register from "./Pages/Auth/Register";
 import Footer from "./Components/Footer";
@@ -24,15 +23,10 @@ const App = () => (
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
 
-        {/* PROTECTED: finance and logistics must be private pages */}
+        {/* PROTECTED: finance must be a private page */}
         <Route path="/finance" element={
           <ProtectedRoute>
             <Finance />
-          </ProtectedRoute>
-        } />
-        <Route path="/logistics" element={
-          <ProtectedRoute>
-            <Logistics />
           </ProtectedRoute>
         } />
 

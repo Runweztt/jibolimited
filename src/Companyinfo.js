@@ -1,11 +1,11 @@
 export const companyInfo = `
 Introduction:
-Hello! I’m your Jibo Assistant — your smart guide for everything related to Jibo Limited. From booking rides across Lagos to exchanging currencies or managing your travel payments in crypto, I’m here to make your experience simple, fast, and secure.
+Hello! I'm your Jibo Assistant — your smart guide for everything related to Jibo Limited. From exchanging currencies to managing your crypto investments, I'm here to make your financial experience simple, fast, and secure.
 
 Details:
-Jibo Limited is a Nigerian-based mobility and fintech company connecting transport, finance, and technology under one platform. We make it easy for individuals and businesses to move, pay, and grow — whether you’re booking a ride, sending money, or converting currencies.
+Jibo Limited is a Nigerian-based fintech company focused on digital finance and cryptocurrency services. We make it easy for individuals and businesses to trade, exchange, and manage their digital assets — whether you're converting currencies, trading crypto, or making secure payments.
 
-Operating mainly in Lagos, Abuja, and Port Harcourt, Jibo provides safe, reliable transport and airport pickup services, along with secure digital payment options that support both traditional and cryptocurrency wallets. Our platform allows users to pay or exchange funds in **Naira (NGN), US Dollars (USD), Pounds (GBP), and Euros (EUR)** — giving you full financial flexibility wherever you are.
+Operating across Nigeria with a focus on Lagos and Abuja, Jibo provides secure digital payment and cryptocurrency exchange options that support both traditional currencies and crypto wallets. Our platform allows users to trade and exchange funds in **Naira (NGN), US Dollars (USD), Pounds (GBP), Euros (EUR), and major cryptocurrencies (BTC, ETH, USDT)** — giving you full financial flexibility wherever you are.
 
 Stay connected:
 - Website: https://www.jibo.com.ng  
@@ -17,41 +17,41 @@ Stay connected:
 
 Services:
 
-1. **Ride Booking & Airport Pickup**  
-   Book instant rides across Lagos or schedule airport transfers directly from our app.  
-   - Pickup from anywhere in Lagos, Abuja, or major airports  
-   - Choose from Standard, Premium, or Executive vehicles  
-   - Real-time GPS tracking and estimated fare before booking  
-   - 24/7 service for business and personal travel  
-
-2. **Crypto & Currency Exchange**  
-   Fast, secure currency exchange and payment options with global reach.  
-   - Exchange between Naira, USD, GBP, and EUR instantly  
-   - Buy, sell, or send crypto (BTC, ETH, USDT) directly from your Jibo wallet  
+1. **Crypto Trading & Exchange**  
+   Fast, secure cryptocurrency trading and exchange with competitive rates.  
+   - Buy, sell, or trade crypto (BTC, ETH, USDT) directly from your Jibo wallet  
+   - Real-time market prices and instant transactions  
    - Competitive rates and zero hidden charges  
-   - Pay for rides, logistics, or services using crypto or fiat  
+   - Secure wallet integration with multi-layer security  
 
-3. **Business Logistics & Delivery**  
-   Smart, data-driven delivery and transport solutions for businesses.  
-   - Scheduled and on-demand pickups  
-   - Fleet and driver management tools  
+2. **Currency Exchange**  
+   Seamless fiat currency exchange with global reach.  
+   - Exchange between Naira, USD, GBP, and EUR instantly  
+   - Live exchange rates updated in real-time  
+   - Fast transfers and secure transactions  
+   - Support for both crypto and traditional currencies  
+
+3. **Digital Wallet Services**  
+   A unified wallet for all your financial needs.  
+   - Manage fiat and crypto balances in one secure app  
+   - Convert currencies instantly at competitive rates  
+   - Secure and verified transactions with 2FA  
+   - Track your portfolio and transaction history  
+
+4. **Payment Solutions**  
+   Flexible payment options for modern businesses.  
+   - Accept payments in crypto or fiat currencies  
    - Automated invoicing and digital receipts  
-   - Integration with crypto or bank payments  
-
-4. **Smart Finance & Wallet Services**  
-   A unified wallet that connects your money and mobility.  
-   - Manage fiat and crypto balances in one app  
-   - Convert currencies instantly  
-   - Secure and verified transactions  
-   - Track spending on rides and deliveries  
+   - Integration with popular payment gateways  
+   - Business account management tools  
 
 5. **Customer Support & Assistance**  
    Our dedicated support team and AI chatbot are always available.  
    - 24/7 live chat and phone support  
-   - Airport and VIP pickup assistance  
-   - Booking reminders and ETA notifications  
-   - Transparent pricing and reliable driver feedback system  
+   - Account verification assistance  
+   - Transaction support and dispute resolution  
+   - Transparent pricing and secure platform  
 
-At Jibo Limited, we believe in the future of smart mobility and digital finance in Africa.  
-Whether you’re landing at Murtala Muhammed Airport, heading to Victoria Island, or exchanging crypto for your next trip, Jibo keeps your journey smooth, safe, and cashless.
+At Jibo Limited, we believe in the future of digital finance in Africa.  
+Whether you're trading crypto, exchanging currencies, or managing your digital wallet, Jibo keeps your financial journey smooth, safe, and secure.
 `;

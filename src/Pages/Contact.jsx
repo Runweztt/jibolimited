@@ -29,7 +29,7 @@ const Contact = () => {
         <div className="max-w-4xl mx-auto">
           <h1 className="text-4xl mt-20 md:text-6xl font-extrabold text-white mb-4">Contact Us</h1>
           <p className="text-gray-300 max-w-3xl mx-auto text-lg">
-            We’d love to hear from you. Whether you're interested in finance, rentals or partnerships our team is ready.
+            We’d love to hear from you. Whether you're interested in finance or partnerships our team is ready.
           </p>
         </div>
       </section>
