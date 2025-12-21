@@ -57,7 +57,7 @@ const Contact = () => {
 
               <div className="bg-[#0b0b25] border border-[#142235] rounded-2xl p-5">
                 <h4 className="text-blue-400 font-semibold">Email & Phone</h4>
-                <p className="text-gray-300 mt-1">support@jiboltd.com<br/>+44 20 7123 4567 | +234 803 123 4567</p>
+                <p className="text-gray-300 mt-1">support@jiboltd.com<br/>+447533616307</p>
               </div>
 
               <div className="flex gap-3">

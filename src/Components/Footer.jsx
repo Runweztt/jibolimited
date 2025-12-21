@@ -81,7 +81,7 @@ const Footer = () => {
                 support@jiboltd.com
               </li>
               <li>
-                <strong className="text-gray-200">Phone:</strong> 08130278863, 02014531128
+                <strong className="text-gray-200">Phone:</strong> +447533616307
               </li>
               <li>
                 <strong className="text-gray-200">Address:</strong> Suite 910, 9th Floor, 8/10 Broad Street, Western House, Lagos Island, Lagos

@@ -13,7 +13,7 @@ Stay connected:
 - Facebook: https://www.facebook.com/jibolimited  
 - LinkedIn: https://www.linkedin.com/company/jibo-limited  
 - Email: support@jibo.com.ng  
-- Phone: +234 (0) 700 123 4567  
+- Phone: +447533616307  
 
 Services:
 
