@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { assets } from "../assets/assets";
 import { useAuth } from "../Context/AuthContext";
@@ -10,185 +10,243 @@ const NAV_LINKS = [
   { name: "Contact", path: "/contact" },
 ];
 
+/**
+ * Navbar Component - Built from scratch with mobile-first approach
+ * 
+ * Architecture:
+ * - Mobile: Full-screen menu panel with CENTERED content
+ * - Desktop: Horizontal navigation bar
+ * - Z-Index: navbar(50) < overlay(60) < mobile-menu(70)
+ * - Backgrounds: ALWAYS solid on mobile (no transparency)
+ * - Animations: Smooth 500ms with fade + slide
+ */
 const Navbar = () => {
-  const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { user, logout } = useAuth();
   const navigate = useNavigate();
 
+  // Close menu on escape key
   useEffect(() => {
-    const handleEsc = (e) => {
-      if (e.key === "Escape") setShowMobileMenu(false);
+    const handleEscape = (e) => {
+      if (e.key === "Escape" && isMobileMenuOpen) {
+        setIsMobileMenuOpen(false);
+      }
     };
-    window.addEventListener("keydown", handleEsc);
-    return () => window.removeEventListener("keydown", handleEsc);
-  }, []);
+    window.addEventListener("keydown", handleEscape);
+    return () => window.removeEventListener("keydown", handleEscape);
+  }, [isMobileMenuOpen]);
 
-  // disable background scroll when menu is open
+  // Prevent body scroll when mobile menu is open
   useEffect(() => {
-    document.body.style.overflow = showMobileMenu ? "hidden" : "auto";
-  }, [showMobileMenu]);
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMobileMenuOpen]);
+
+  const handleNavigation = (path) => {
+    navigate(path);
+    setIsMobileMenuOpen(false);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   const handleLogout = async () => {
     try {
       await logout();
-      setShowMobileMenu(false);
+      setIsMobileMenuOpen(false);
       navigate("/");
-    } catch (err) {
-      console.error(err);
+    } catch (error) {
+      // Silent error - user will see auth state change
     }
   };
 
-  const navTo = (path) => {
-    navigate(path);
-    setShowMobileMenu(false);
-    // Scroll to top after navigation
-    setTimeout(() => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }, 100);
-  };
-
   return (
-    <header className="fixed top-0 left-0 w-full z-[100] bg-[#0b1020]/90 backdrop-blur-md shadow-md">
-      <div className="flex items-center justify-between py-3 px-6 md:px-10 lg:px-20">
-        {/* Logo */}
-        <button
-          onClick={() => navTo("/")}
-          className="flex items-center gap-3"
-        >
-          <img
-            src={assets.logo}
-            alt="Jibo logo"
-            className="w-12 md:w-14"
-            onError={(e) => (e.target.style.display = "none")}
-          />
-        </button>
-
-        {/* Desktop Links */}
-        <nav className="hidden md:flex gap-8 text-white font-medium">
-          {NAV_LINKS.map((link) => (
-            <button
-              key={link.name}
-              onClick={() => navTo(link.path)}
-              className="hover:text-blue-400 transition"
-            >
-              {link.name}
-            </button>
-          ))}
-        </nav>
-        
-        {/* Desktop Auth Buttons */}
-        <div className="hidden md:block">
-          {user ? (
-            <button
-              onClick={handleLogout}
-              className="bg-red-600 hover:bg-red-700 px-6 py-2.5 rounded-full text-white font-semibold transition"
-            >
-              Logout
-            </button>
-          ) : (
-            <button
-              onClick={() => navTo("/login")}
-              className="bg-blue-600 hover:bg-blue-700 px-6 py-2.5 rounded-full text-white font-semibold transition"
-            >
-              Sign In
-            </button>
-          )}
-        </div>
-
-        {/* Mobile menu button */}
-        <button
-          onClick={() => setShowMobileMenu(true)}
-          className="md:hidden p-2"
-        >
-          <svg
-            className="w-7 h-7 text-white"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-          >
-            <path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z" />
-          </svg>
-        </button>
-      </div>
-
-      {/* Overlay behind the menu */}
-      {showMobileMenu && (
-        <div
-          className="fixed inset-0 bg-black/50 z-[400]"
-          onClick={() => setShowMobileMenu(false)}
-        />
-      )}
-
-      {/* Mobile menu drawer */}
-      <aside
-        style={{ backgroundColor: '#0b1020' }}
-        className={`fixed top-0 right-0 h-full w-72 text-white shadow-2xl z-[500] transform transition-transform duration-300 ${
-          showMobileMenu ? "translate-x-0" : "translate-x-full"
-        }`}
+    <>
+      {/* NAVBAR - Fixed header with solid background */}
+      <nav
+        className="fixed top-0 left-0 right-0 z-50"
+        style={{ background: "#0b1020" }}
       >
-        <div className="flex justify-end p-6">
-          <button
-            onClick={() => setShowMobileMenu(false)}
-            className="p-2 rounded-full hover:bg-white/10"
-          >
-            <svg
-              className="w-6 h-6 text-white"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            
+            {/* Logo */}
+            <button
+              onClick={() => handleNavigation("/")}
+              className="flex items-center space-x-2 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded"
+              aria-label="Go to home"
             >
-              <path
-                d="M6 6L18 18M6 18L18 6"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
+              <img
+                src={assets.logo}
+                alt="Jibo"
+                className="h-10 w-10"
+                onError={(e) => (e.target.style.display = "none")}
               />
-            </svg>
-          </button>
-        </div>
+            </button>
 
-        <nav className="px-6">
-          <ul className="flex flex-col gap-6">
-            {NAV_LINKS.map((link) => (
-              <li key={link.name}>
+            {/* DESKTOP Navigation */}
+            <div className="hidden md:flex items-center space-x-8">
+              {NAV_LINKS.map((link) => (
                 <button
-                  onClick={() => navTo(link.path)}
-                  className="w-full text-left text-lg font-medium hover:text-blue-400 transition"
+                  key={link.path}
+                  onClick={() => handleNavigation(link.path)}
+                  className="text-gray-300 hover:text-white transition-colors duration-200 font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 rounded px-2 py-1"
                 >
                   {link.name}
                 </button>
-              </li>
-            ))}
-          </ul>
+              ))}
+            </div>
 
-          <div className="mt-8">
-            {user ? (
-              <button
-                onClick={handleLogout}
-                className="w-full bg-red-600 hover:bg-red-700 px-5 py-2 rounded-full text-white font-semibold transition"
-              >
-                Logout
-              </button>
-            ) : (
-              <div className="flex flex-col gap-3">
+            {/* DESKTOP Auth Button */}
+            <div className="hidden md:block">
+              {user ? (
                 <button
-                  onClick={() => navTo("/login")}
-                  className="w-full bg-blue-600 hover:bg-blue-700 px-5 py-2 rounded-full text-white font-semibold transition"
+                  onClick={handleLogout}
+                  className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg font-semibold transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-red-500"
+                >
+                  Logout
+                </button>
+              ) : (
+                <button
+                  onClick={() => handleNavigation("/login")}
+                  className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-semibold transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
                   Sign In
                 </button>
-                <button
-                  onClick={() => navTo("/register")}
-                  className="w-full border border-blue-600 text-blue-400 px-5 py-2 rounded-full font-semibold transition"
-                >
-                  Register
-                </button>
-              </div>
-            )}
+              )}
+            </div>
+
+            {/* MOBILE Hamburger Button */}
+            <button
+              onClick={() => setIsMobileMenuOpen(true)}
+              className="md:hidden p-2 rounded-lg hover:bg-white/10 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              aria-label="Open menu"
+              aria-expanded={isMobileMenuOpen}
+            >
+              <svg
+                className="w-6 h-6 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+            </button>
           </div>
-        
-        </nav>
-      </aside>
-    </header>
+        </div>
+      </nav>
+
+      {/* MOBILE MENU OVERLAY */}
+      {isMobileMenuOpen && (
+        <div
+          className="fixed inset-0 z-60 md:hidden transition-opacity duration-500"
+          style={{ background: "rgba(0, 0, 0, 0.8)" }}
+          onClick={() => setIsMobileMenuOpen(false)}
+          aria-hidden="true"
+        />
+      )}
+
+      {/* MOBILE MENU PANEL - Centered Content */}
+      <div
+        className={`fixed top-0 left-0 right-0 bottom-0 z-70 md:hidden transform transition-all duration-500 ease-out ${
+          isMobileMenuOpen ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
+        }`}
+        style={{ background: "#0b1020" }}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Mobile menu"
+      >
+        <div className="flex flex-col h-full">
+          
+          {/* Mobile Menu Header - Centered */}
+          <div className="flex items-center justify-center px-4 h-16 border-b border-gray-800 relative">
+            <h2 className="text-xl font-bold text-white">Menu</h2>
+            <button
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="absolute right-4 p-2 rounded-lg hover:bg-white/10 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              aria-label="Close menu"
+            >
+              <svg
+                className="w-6 h-6 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          </div>
+
+          {/* Mobile Menu Content - Centered & Vertically Aligned */}
+          <div className="flex-1 overflow-y-auto px-6 py-8 flex flex-col items-center justify-center">
+            
+            {/* Navigation Links - Centered */}
+            <nav className="w-full max-w-md space-y-3">
+              {NAV_LINKS.map((link, index) => (
+                <button
+                  key={link.path}
+                  onClick={() => handleNavigation(link.path)}
+                  className="w-full text-center px-6 py-4 text-xl font-semibold text-gray-300 hover:text-white hover:bg-blue-600/20 rounded-xl transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  style={{
+                    animationDelay: `${index * 50}ms`,
+                    animation: isMobileMenuOpen ? 'fadeInUp 0.4s ease-out forwards' : 'none'
+                  }}
+                >
+                  {link.name}
+                </button>
+              ))}
+            </nav>
+
+            {/* Auth Section - Centered */}
+            <div className="w-full max-w-md mt-12 pt-8 border-t border-gray-800">
+              {user ? (
+                <div className="space-y-4">
+                  <div className="px-6 py-4 bg-gray-900 rounded-xl border border-gray-800 text-center">
+                    <p className="text-sm text-gray-400 mb-1">Signed in as</p>
+                    <p className="text-white font-semibold truncate">{user.email}</p>
+                  </div>
+                  <button
+                    onClick={handleLogout}
+                    className="w-full bg-red-600 hover:bg-red-700 text-white px-6 py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-red-500 shadow-lg"
+                  >
+                    Logout
+                  </button>
+                </div>
+              ) : (
+                <div className="space-y-4">
+                  <button
+                    onClick={() => handleNavigation("/login")}
+                    className="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-lg"
+                  >
+                    Sign In
+                  </button>
+                  <button
+                    onClick={() => handleNavigation("/register")}
+                    className="w-full border-2 border-blue-600 text-blue-400 hover:bg-blue-600/10 px-6 py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  >
+                    Create Account
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
   );
 };
 

@@ -43,7 +43,7 @@ const Home = () => {
         }
         .fade-up { animation: fadeInUp 0.8s ease both; }
         .floaty { animation: floaty 10s ease-in-out infinite; }
-        .ticker-scroll { animation: scrollLeft 38s linear infinite; }
+        .ticker-scroll { animation: scrollLeft 25s linear infinite; }
       `}</style>
 
       {/* Navbar */}

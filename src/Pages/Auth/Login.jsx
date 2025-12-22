@@ -33,7 +33,6 @@ const Login = () => {
       
       navigate(redirectPath, { replace: true });
     } catch (err) {
-      console.error(err);
       let msg = "Failed to login.";
       if (err.code === "auth/user-not-found") msg = "No account found with this email.";
       if (err.code === "auth/wrong-password") msg = "Incorrect password.";
@@ -90,7 +89,6 @@ const Login = () => {
       // Redirect to appropriate page
       navigate(redirectPath, { replace: true });
     } catch (err) {
-      console.error(err);
       let msg = "Failed to sign in with Google.";
       if (err.code === "auth/popup-closed-by-user") msg = "Sign-in cancelled.";
       if (err.code === "auth/popup-blocked") msg = "Popup blocked. Please allow popups for this site.";

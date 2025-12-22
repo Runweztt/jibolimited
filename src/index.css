@@ -6,14 +6,11 @@
   font-family: outfit;
 }
 
-/* Smooth scrolling for the entire page */
 html {
   scroll-behavior: smooth;
   scrollbar-width: none;
-  /* Firefox */
 }
 
-/* Hide scrollbars for all browsers */
 ::-webkit-scrollbar {
   width: 0px;
   height: 0px;
@@ -60,7 +57,53 @@ html {
   animation: scroll-left 30s linear infinite;
 }
 
-/* Standardized input styling with improved focus states */
+/* Fade in up animation for mobile menu items */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Input styling */
 .input {
-  @apply w-full px-4 py-2 bg-transparent border border-blue-800 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-blue-600 focus:outline-none transition-all duration-200;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  background-color: transparent;
+  border: 1px solid #1e40af;
+  border-radius: 0.5rem;
+  transition: all 0.2s;
+  outline: none;
+}
+
+.input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+}
+
+/* Z-index utilities for navbar */
+.z-50 {
+  z-index: 50;
+}
+
+.z-60 {
+  z-index: 60;
+}
+
+.z-70 {
+  z-index: 70;
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

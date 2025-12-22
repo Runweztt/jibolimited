@@ -16,7 +16,7 @@ const App = () => (
   <div className="font-sans bg-gray-950 text-white min-h-screen">
     <AuthProvider>
       <Navbar />
-      <Jibochatbot />
+      
 
       <Routes>
         <Route path="/" element={<Home />} />
@@ -36,7 +36,7 @@ const App = () => (
 
         {/* keep other routes here */}
       </Routes>
-
+      <Jibochatbot />
       <Footer />
     </AuthProvider>
   </div>

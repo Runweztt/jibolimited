@@ -22,12 +22,10 @@ const Register = () => {
   // Handle registration
   const handleRegister = async (e) => {
     e.preventDefault();
-    console.log("handleRegister started");
     setError("");
     setLoading(true);
 
     try {
-      console.log("Creating user with email:", email);
       // Create user in Firebase Auth
       const userCredential = await createUserWithEmailAndPassword(
         auth,
@@ -36,10 +34,8 @@ const Register = () => {
       );
 
       const user = userCredential.user;
-      console.log("User created successfully:", user.uid);
 
       // Save user info to Firestore with timeout
-      console.log(" Saving user data to Firestore...");
       try {
         // Add a timeout to prevent hanging
         await Promise.race([
@@ -53,25 +49,16 @@ const Register = () => {
             setTimeout(() => reject(new Error("Firestore timeout")), 3000)
           )
         ]);
-        console.log(" User data saved to Firestore");
       } catch (firestoreError) {
-        console.error(" Firestore error:", firestoreError);
-        console.warn(" Continuing without saving to Firestore. Please check Firestore rules.");
         // Continue anyway - user is created in Auth
       }
 
       // Wait a moment for auth state to propagate
-      // This prevents race condition with ProtectedRoute
-      console.log(" Waiting for auth state to propagate...");
       await new Promise(resolve => setTimeout(resolve, 500));
-      console.log(" Auth state should be ready");
 
       // Redirect after success with replace to prevent back button issues
-      console.log("Navigating to /finance...");
       navigate("/finance", { replace: true });
-      console.log(" Navigate called");
     } catch (err) {
-      console.error(" Registration error:", err);
       let msg = "Failed to register.";
       if (err.code === "auth/email-already-in-use") msg = "This email is already registered.";
       if (err.code === "auth/weak-password") msg = "Password should be at least 6 characters.";
@@ -117,8 +104,7 @@ const Register = () => {
           ]);
         }
       } catch (firestoreError) {
-        console.warn(" Firestore error during Google sign-in:", firestoreError);
-        console.warn(" Continuing without Firestore. Please check Firestore rules.");
+        // Continue without Firestore - user is authenticated
       }
 
       // Wait for auth state to propagate
@@ -127,7 +113,6 @@ const Register = () => {
       // Redirect to finance page
       navigate("/finance", { replace: true });
     } catch (err) {
-      console.error(err);
       let msg = "Failed to sign in with Google.";
       if (err.code === "auth/popup-closed-by-user") msg = "Sign-in cancelled.";
       if (err.code === "auth/popup-blocked") msg = "Popup blocked. Please allow popups for this site.";

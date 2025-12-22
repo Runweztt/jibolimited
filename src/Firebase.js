@@ -3,16 +3,6 @@ import { getAuth, GoogleAuthProvider } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getAnalytics, isSupported } from "firebase/analytics";
 
-// TEST: Log ALL environment variables
-console.log("ALL ENV VARS:", import.meta.env);
-
-// Debug logging
-console.log("Environment variables:", {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-});
-
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
@@ -23,7 +13,10 @@ const firebaseConfig = {
   measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 };
 
-console.log("Firebase Config:", firebaseConfig);
+// Validate required config
+if (!firebaseConfig.apiKey || !firebaseConfig.projectId) {
+  throw new Error("Firebase configuration is incomplete. Please check your environment variables.");
+}
 
 const app = initializeApp(firebaseConfig);
 
