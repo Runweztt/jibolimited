@@ -63,7 +63,7 @@ const Home = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start mt-6">
               <button
                 onClick={()=>{navigate(`/Finance`); scrollTo(0,0)}}
-                className="bg-[#3b82f6] px-6 py-2.5 rounded-full text-white hover:bg-[#2563eb] transition font-medium text-center"
+                className="bg-[#002B5C] px-6 py-2.5 rounded-full text-white hover:bg-[#003d7a] transition font-medium text-center"
               >
                 Crypto Exchange
               </button>

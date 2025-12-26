@@ -19,13 +19,13 @@ const Footer = () => {
           <div className="flex gap-3 flex-wrap justify-center sm:justify-end">
             <a
               href="#register"
-              className="bg-[#3b82f6] hover:bg-[#2563eb] px-5 py-2.5 rounded-full text-sm font-medium text-white transition"
+              className="bg-[#002B5C] hover:bg-[#003d7a] px-5 py-2.5 rounded-full text-sm font-medium text-white transition"
             >
               Create Account
             </a>
             <a
               href="#Booking"
-              className="border border-[#3b82f6] hover:bg-[#3b82f6] hover:text-white px-5 py-2.5 rounded-full text-sm font-medium transition"
+              className="border border-[#002B5C] hover:bg-[#002B5C] hover:text-white px-5 py-2.5 rounded-full text-sm font-medium transition"
             >
               Book a Ride
             </a>
@@ -39,9 +39,9 @@ const Footer = () => {
           {/* Left Section */}
           <div>
             <img
-              src={assets.logo}
-              alt="Jibo Limited Logo"
-              className="mb-3 w-28"
+              src={assets.jibo_currency_logo}
+              alt="Jibo Currency Logo"
+              className="mb-3 h-16 w-auto"
             />
             <p className="text-sm text-gray-400 max-w-xs leading-relaxed">
               Jibo Limited empowers users with smart crypto exchange, digital

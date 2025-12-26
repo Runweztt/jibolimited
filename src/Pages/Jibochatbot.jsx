@@ -72,7 +72,7 @@ const Jibochatbot = () => {
         }}
       >
         {/* Header */}
-        <div className="bg-gradient-to-r from-blue-600 to-blue-700 px-4 py-3 sm:py-4 flex items-center justify-between">
+        <div className="bg-gradient-to-r from-[#002B5C] to-[#003d7a] px-4 py-3 sm:py-4 flex items-center justify-between">
           <div className="flex items-center gap-2 sm:gap-3">
             <div className="relative">
               <Chatboticon />
@@ -141,7 +141,7 @@ const Jibochatbot = () => {
       {/* Toggle Button - Bottom Right, Touch Friendly */}
       <button
         onClick={() => setShowBot((prev) => !prev)}
-        className="pointer-events-auto self-end bg-gradient-to-r from-blue-600 to-blue-700 text-white p-4 sm:p-4 rounded-full shadow-2xl hover:shadow-blue-500/50 hover:scale-110 active:scale-95 transition-all duration-300 flex items-center justify-center min-w-[56px] min-h-[56px]"
+        className="pointer-events-auto self-end bg-gradient-to-r from-[#002B5C] to-[#003d7a] text-white p-4 sm:p-4 rounded-full shadow-2xl hover:shadow-[#002B5C]/50 hover:scale-110 active:scale-95 transition-all duration-300 flex items-center justify-center min-w-[56px] min-h-[56px]"
         aria-label={showBot ? "Close chat" : "Open chat"}
       >
         {showBot ? (

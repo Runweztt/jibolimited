@@ -41,7 +41,7 @@ const Chatform = ({ChatHistory, setChatHistory, generateBot}) => {
             />
             <button 
               type="submit"
-              className="px-4 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold transition-all duration-200 flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-lg hover:shadow-xl"
+              className="px-4 py-3 bg-[#002B5C] hover:bg-[#003d7a] text-white rounded-lg font-semibold transition-all duration-200 flex items-center gap-2 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-lg hover:shadow-xl"
               aria-label="Send message"
             >
               <span className="hidden sm:inline">Send</span>

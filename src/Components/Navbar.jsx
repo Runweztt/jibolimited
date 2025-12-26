@@ -81,9 +81,9 @@ const Navbar = () => {
               aria-label="Go to home"
             >
               <img
-                src={assets.logo}
-                alt="Jibo"
-                className="h-10 w-10"
+                src={assets.jibo_currency_logo}
+                alt="Jibo Currency"
+                className="h-12 w-auto"
                 onError={(e) => (e.target.style.display = "none")}
               />
             </button>
@@ -113,7 +113,7 @@ const Navbar = () => {
               ) : (
                 <button
                   onClick={() => handleNavigation("/login")}
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-semibold transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="bg-[#002B5C] hover:bg-[#003d7a] text-white px-6 py-2 rounded-lg font-semibold transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
                   Sign In
                 </button>
@@ -230,13 +230,13 @@ const Navbar = () => {
                 <div className="space-y-4">
                   <button
                     onClick={() => handleNavigation("/login")}
-                    className="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-lg"
+                    className="w-full bg-[#002B5C] hover:bg-[#003d7a] text-white px-6 py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-lg"
                   >
                     Sign In
                   </button>
                   <button
                     onClick={() => handleNavigation("/register")}
-                    className="w-full border-2 border-blue-600 text-blue-400 hover:bg-blue-600/10 px-6 py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="w-full border-2 border-[#002B5C] text-white hover:bg-[#002B5C]/20 px-6 py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   >
                     Create Account
                   </button>

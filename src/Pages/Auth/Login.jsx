@@ -1,9 +1,5 @@
-
-
 import React, { useState } from "react";
-import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
-import { doc, setDoc, getDoc } from "firebase/firestore";
-import { auth, db, googleProvider } from "../../Firebase";
+import { supabase } from "../../supabase";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 
 const Login = () => {
@@ -26,22 +22,29 @@ const Login = () => {
     setLoading(true);
 
     try {
-      await signInWithEmailAndPassword(auth, email, password);
-      
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      if (error) throw error;
+
       // Wait for auth state to propagate
       await new Promise(resolve => setTimeout(resolve, 500));
       
       navigate(redirectPath, { replace: true });
     } catch (err) {
       let msg = "Failed to login.";
-      if (err.code === "auth/user-not-found") msg = "No account found with this email.";
-      if (err.code === "auth/wrong-password") msg = "Incorrect password.";
-      if (err.code === "auth/invalid-email") msg = "Invalid email address.";
-      if (err.code === "auth/too-many-requests") msg = "Too many failed attempts. Please try again later.";
+      if (err.message?.includes("Invalid login credentials")) {
+        msg = "Invalid email or password.";
+      } else if (err.message?.includes("Email not confirmed")) {
+        msg = "Please verify your email address.";
+      } else if (err.message) {
+        msg = err.message;
+      }
       setError(msg);
       setLoading(false);
     }
-    // Note: Don't set loading to false on success - let navigation happen
   };
 
   // Handle Google Sign-In
@@ -50,48 +53,21 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const result = await signInWithPopup(auth, googleProvider);
-      const user = result.user;
-
-      // Check if user document exists, if not create it (with timeout)
-      try {
-        const userDocRef = doc(db, "users", user.uid);
-        const userDoc = await Promise.race([
-          getDoc(userDocRef),
-          new Promise((_, reject) => 
-            setTimeout(() => reject(new Error("Firestore timeout")), 3000)
-          )
-        ]);
-
-        if (!userDoc.exists()) {
-          // New user - save their info (with timeout)
-          const nameParts = user.displayName?.split(" ") || ["", ""];
-          await Promise.race([
-            setDoc(userDocRef, {
-              firstName: nameParts[0] || "",
-              lastName: nameParts.slice(1).join(" ") || "",
-              email: user.email,
-              createdAt: new Date(),
-            }),
-            new Promise((_, reject) => 
-              setTimeout(() => reject(new Error("Firestore timeout")), 3000)
-            )
-          ]);
+      const { data, error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: `${window.location.origin}/finance`,
         }
-      } catch (firestoreError) {
-        console.warn("⚠️ Firestore error during Google sign-in:", firestoreError);
-        console.warn("⚠️ Continuing without Firestore. Please check Firestore rules.");
-      }
+      });
 
-      // Wait for auth state to propagate
-      await new Promise(resolve => setTimeout(resolve, 500));
+      if (error) throw error;
 
-      // Redirect to appropriate page
-      navigate(redirectPath, { replace: true });
+      // OAuth will redirect, so we don't need to navigate manually
     } catch (err) {
       let msg = "Failed to sign in with Google.";
-      if (err.code === "auth/popup-closed-by-user") msg = "Sign-in cancelled.";
-      if (err.code === "auth/popup-blocked") msg = "Popup blocked. Please allow popups for this site.";
+      if (err.message) {
+        msg = err.message;
+      }
       setError(msg);
       setLoading(false);
     }
@@ -133,7 +109,7 @@ const Login = () => {
             className={`w-full px-6 py-2.5 rounded-lg font-semibold transition-colors ${
               loading 
                 ? "bg-blue-800 text-blue-300 cursor-not-allowed" 
-                : "bg-blue-600 hover:bg-blue-700 text-white"
+                : "bg-[#002B5C] hover:bg-[#003d7a] text-white"
             }`}
           >
             {loading ? "Logging in..." : "Login"}
@@ -167,7 +143,7 @@ const Login = () => {
         </button>
 
         <p className="text-gray-400 text-sm text-center mt-4">
-          Don’t have an account?{" "}
+          Don't have an account?{" "}
           <Link to="/register" className="text-blue-400 hover:underline">
             Register
           </Link>

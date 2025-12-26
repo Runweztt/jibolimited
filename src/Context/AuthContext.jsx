@@ -2,8 +2,7 @@
 // Provides "user" and "logout" to all components
 
 import { createContext, useContext, useEffect, useState } from "react";
-import { onAuthStateChanged, signOut } from "firebase/auth";
-import { auth } from "../Firebase";
+import { supabase } from "../supabase";
 
 const AuthContext = createContext();
 
@@ -15,23 +14,30 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true); // Prevents flicker
 
   useEffect(() => {
-    // Fires whenever login/logout happens
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
+    // Get initial session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setUser(session?.user ?? null);
       setLoading(false);
     });
 
-    return unsubscribe; // Cleanup
+    // Listen for auth changes
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+
+    return () => subscription.unsubscribe();
   }, []);
 
   // Log user out
   const logout = async () => {
-    await signOut(auth);
+    await supabase.auth.signOut();
   };
 
   return (
     <AuthContext.Provider value={{ user, logout }}>
-      {/* Don't render children until Firebase knows if user is logged in */}
+      {/* Don't render children until Supabase knows if user is logged in */}
       {!loading && children}
     </AuthContext.Provider>
   );

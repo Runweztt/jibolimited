@@ -1,10 +1,6 @@
-
 import React, { useState } from "react";
-import { createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
-import { doc, setDoc, getDoc } from "firebase/firestore";
-import { auth, db, googleProvider } from "../../Firebase";
+import { supabase } from "../../supabase";
 import { useNavigate, Link } from "react-router-dom";
-
 
 const Register = () => {
   // Form states
@@ -26,31 +22,24 @@ const Register = () => {
     setLoading(true);
 
     try {
-      // Create user in Firebase Auth
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
+      const { data, error } = await supabase.auth.signUp({
         email,
-        password
-      );
+        password,
+        options: {
+          data: {
+            first_name: firstName,
+            last_name: lastName,
+          },
+        },
+      });
 
-      const user = userCredential.user;
+      if (error) throw error;
 
-      // Save user info to Firestore with timeout
-      try {
-        // Add a timeout to prevent hanging
-        await Promise.race([
-          setDoc(doc(db, "users", user.uid), {
-            firstName,
-            lastName,
-            email,
-            createdAt: new Date(),
-          }),
-          new Promise((_, reject) => 
-            setTimeout(() => reject(new Error("Firestore timeout")), 3000)
-          )
-        ]);
-      } catch (firestoreError) {
-        // Continue anyway - user is created in Auth
+      // Check if email confirmation is required
+      if (data?.user && !data.session) {
+        setError("Please check your email to confirm your account.");
+        setLoading(false);
+        return;
       }
 
       // Wait a moment for auth state to propagate
@@ -60,13 +49,16 @@ const Register = () => {
       navigate("/finance", { replace: true });
     } catch (err) {
       let msg = "Failed to register.";
-      if (err.code === "auth/email-already-in-use") msg = "This email is already registered.";
-      if (err.code === "auth/weak-password") msg = "Password should be at least 6 characters.";
-      if (err.code === "auth/invalid-email") msg = "Invalid email address.";
+      if (err.message?.includes("already registered")) {
+        msg = "This email is already registered.";
+      } else if (err.message?.includes("Password should be")) {
+        msg = "Password should be at least 6 characters.";
+      } else if (err.message) {
+        msg = err.message;
+      }
       setError(msg);
       setLoading(false);
     }
-    // Note: Don't set loading to false on success - let navigation happen
   };
 
   // Handle Google Sign-In
@@ -75,52 +67,25 @@ const Register = () => {
     setLoading(true);
 
     try {
-      const result = await signInWithPopup(auth, googleProvider);
-      const user = result.user;
-
-      // Check if user document exists, if not create it (with timeout)
-      try {
-        const userDocRef = doc(db, "users", user.uid);
-        const userDoc = await Promise.race([
-          getDoc(userDocRef),
-          new Promise((_, reject) => 
-            setTimeout(() => reject(new Error("Firestore timeout")), 3000)
-          )
-        ]);
-
-        if (!userDoc.exists()) {
-          // New user - save their info (with timeout)
-          const nameParts = user.displayName?.split(" ") || ["", ""];
-          await Promise.race([
-            setDoc(userDocRef, {
-              firstName: nameParts[0] || "",
-              lastName: nameParts.slice(1).join(" ") || "",
-              email: user.email,
-              createdAt: new Date(),
-            }),
-            new Promise((_, reject) => 
-              setTimeout(() => reject(new Error("Firestore timeout")), 3000)
-            )
-          ]);
+      const { data, error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: `${window.location.origin}/finance`,
         }
-      } catch (firestoreError) {
-        // Continue without Firestore - user is authenticated
-      }
+      });
 
-      // Wait for auth state to propagate
-      await new Promise(resolve => setTimeout(resolve, 500));
+      if (error) throw error;
 
-      // Redirect to finance page
-      navigate("/finance", { replace: true });
+      // OAuth will redirect, so we don't need to navigate manually
     } catch (err) {
       let msg = "Failed to sign in with Google.";
-      if (err.code === "auth/popup-closed-by-user") msg = "Sign-in cancelled.";
-      if (err.code === "auth/popup-blocked") msg = "Popup blocked. Please allow popups for this site.";
+      if (err.message) {
+        msg = err.message;
+      }
       setError(msg);
       setLoading(false);
     }
   };
-
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-[#030318]">
@@ -179,7 +144,7 @@ const Register = () => {
             className={`w-full px-6 py-2.5 rounded-lg font-semibold transition-colors ${
               loading 
                 ? "bg-blue-800 text-blue-300 cursor-not-allowed" 
-                : "bg-blue-600 hover:bg-blue-700 text-white"
+                : "bg-[#002B5C] hover:bg-[#003d7a] text-white"
             }`}
           >
             {loading ? "Creating Account..." : "Register"}
