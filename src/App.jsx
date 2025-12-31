@@ -5,12 +5,14 @@ import Home from "./Components/Home";
 import About from "./Pages/About";
 import Contact from "./Pages/Contact";
 import Finance from "./Pages/Finance/Finance";
+import Dashboard from "./Pages/Dashboard";
 import Login from "./Pages/Auth/Login";
 import Register from "./Pages/Auth/Register";
 import Footer from "./Components/Footer";
 import Jibochatbot from "./Pages/Jibochatbot";
 import { AuthProvider } from "./Context/AuthContext";
 import ProtectedRoute from "./Components/ProtectedRoute";
+import StickyCTA from "./Components/StickyCTA";
 
 const App = () => (
   <div className="font-sans bg-gray-950 text-white min-h-screen">
@@ -22,6 +24,13 @@ const App = () => (
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
+
+        {/* PROTECTED: dashboard */}
+        <Route path="/dashboard" element={
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        } />
 
         {/* PROTECTED: finance must be a private page */}
         <Route path="/finance" element={
@@ -36,6 +45,7 @@ const App = () => (
 
         {/* keep other routes here */}
       </Routes>
+      <StickyCTA />
       <Jibochatbot />
       <Footer />
     </AuthProvider>

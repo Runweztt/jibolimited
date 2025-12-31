@@ -1,252 +1,238 @@
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { assets } from "../assets/assets";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "../Context/AuthContext";
+import { buttonHover } from "../utils/animations";
+import { assets } from "../assets/assets";
 
-const NAV_LINKS = [
-  { name: "Home", path: "/" },
-  { name: "About", path: "/about" },
-  { name: "Crypto", path: "/finance" },
-  { name: "Contact", path: "/contact" },
-];
-
-/**
- * Navbar Component - Built from scratch with mobile-first approach
- * 
- * Architecture:
- * - Mobile: Full-screen menu panel with CENTERED content
- * - Desktop: Horizontal navigation bar
- * - Z-Index: navbar(50) < overlay(60) < mobile-menu(70)
- * - Backgrounds: ALWAYS solid on mobile (no transparency)
- * - Animations: Smooth 500ms with fade + slide
- */
 const Navbar = () => {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
-  // Close menu on escape key
+  // Handle scroll effect
   useEffect(() => {
-    const handleEscape = (e) => {
-      if (e.key === "Escape" && isMobileMenuOpen) {
-        setIsMobileMenuOpen(false);
-      }
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
     };
-    window.addEventListener("keydown", handleEscape);
-    return () => window.removeEventListener("keydown", handleEscape);
-  }, [isMobileMenuOpen]);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
-  // Prevent body scroll when mobile menu is open
+  // Close mobile menu on route change
   useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [isMobileMenuOpen]);
-
-  const handleNavigation = (path) => {
-    navigate(path);
-    setIsMobileMenuOpen(false);
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
+    setIsOpen(false);
+  }, [location.pathname]);
 
   const handleLogout = async () => {
     try {
       await logout();
-      setIsMobileMenuOpen(false);
       navigate("/");
     } catch (error) {
-      // Silent error - user will see auth state change
+      console.error("Logout failed:", error);
     }
   };
 
+  const navLinks = [
+    { name: "Home", path: "/" },
+    { name: "Finance", path: "/finance" },
+    { name: "About", path: "/about" },
+    { name: "Contact", path: "/contact" },
+  ];
+
+  const isActive = (path) => location.pathname === path;
+
   return (
-    <>
-      {/* NAVBAR - Fixed header with solid background */}
-      <nav
-        className="fixed top-0 left-0 right-0 z-50"
-        style={{ background: "#0b1020" }}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            
-            {/* Logo */}
-            <button
-              onClick={() => handleNavigation("/")}
-              className="flex items-center space-x-2 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded"
-              aria-label="Go to home"
-            >
-              <img
-                src={assets.jibo_currency_logo}
-                alt="Jibo Currency"
-                className="h-12 w-auto"
-                onError={(e) => (e.target.style.display = "none")}
-              />
-            </button>
-
-            {/* DESKTOP Navigation */}
-            <div className="hidden md:flex items-center space-x-8">
-              {NAV_LINKS.map((link) => (
-                <button
-                  key={link.path}
-                  onClick={() => handleNavigation(link.path)}
-                  className="text-gray-300 hover:text-white transition-colors duration-200 font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 rounded px-2 py-1"
-                >
-                  {link.name}
-                </button>
-              ))}
+    <nav
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? "bg-[#0b1020]/95 backdrop-blur-xl border-b border-[#1e293b] shadow-lg"
+          : "bg-transparent"
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-24">
+        <div className="flex items-center justify-between h-20">
+          
+          {/* Logo */}
+          <Link to="/" className="flex items-center gap-3 group">
+            <img
+              src={assets.jibo_currency_logo}
+              alt="Jibo Currency"
+              className="h-12 w-auto"
+              onError={(e) => {
+                e.target.style.display = 'none';
+                e.target.nextSibling.style.display = 'flex';
+              }}
+            />
+            {/* Fallback gradient logo */}
+            <div className="hidden w-10 h-10 bg-gradient-to-br from-blue-600 to-cyan-600 rounded-xl items-center justify-center shadow-lg shadow-blue-500/30 group-hover:shadow-blue-500/50 transition-all">
+              <span className="text-white font-bold text-xl">J</span>
             </div>
+          </Link>
 
-            {/* DESKTOP Auth Button */}
-            <div className="hidden md:block">
-              {user ? (
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center gap-8">
+            {navLinks.map((link) => (
+              <Link
+                key={link.path}
+                to={link.path}
+                className={`relative text-sm font-medium transition-colors ${
+                  isActive(link.path)
+                    ? "text-white"
+                    : "text-gray-400 hover:text-white"
+                }`}
+              >
+                {link.name}
+                {isActive(link.path) && (
+                  <motion.div
+                    layoutId="navbar-indicator"
+                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-blue-600"
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  />
+                )}
+              </Link>
+            ))}
+          </div>
+
+          {/* Desktop Auth Buttons */}
+          <div className="hidden md:flex items-center gap-3">
+            {user ? (
+              <>
+                <Link
+                  to="/dashboard"
+                  className="px-4 py-2 text-sm font-medium text-white hover:text-blue-400 transition-colors"
+                >
+                  Dashboard
+                </Link>
                 <button
                   onClick={handleLogout}
-                  className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-lg font-semibold transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-red-500"
+                  className="px-4 py-2 text-sm font-medium text-gray-400 hover:text-white transition-colors"
                 >
                   Logout
                 </button>
-              ) : (
-                <button
-                  onClick={() => handleNavigation("/login")}
-                  className="bg-[#002B5C] hover:bg-[#003d7a] text-white px-6 py-2 rounded-lg font-semibold transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              </>
+            ) : (
+              <>
+                <Link
+                  to="/login"
+                  className="px-4 py-2 text-sm font-medium text-white hover:text-blue-400 transition-colors"
                 >
-                  Sign In
-                </button>
-              )}
-            </div>
-
-            {/* MOBILE Hamburger Button */}
-            <button
-              onClick={() => setIsMobileMenuOpen(true)}
-              className="md:hidden p-2 rounded-lg hover:bg-white/10 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              aria-label="Open menu"
-              aria-expanded={isMobileMenuOpen}
-            >
-              <svg
-                className="w-6 h-6 text-white"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
-            </button>
+                  Login
+                </Link>
+                <motion.div
+                  variants={buttonHover}
+                  initial="rest"
+                  whileHover="hover"
+                  whileTap="tap"
+                >
+                  <Link
+                    to="/register"
+                    className="px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold rounded-full transition-all"
+                  >
+                    Get Started
+                  </Link>
+                </motion.div>
+              </>
+            )}
           </div>
-        </div>
-      </nav>
 
-      {/* MOBILE MENU OVERLAY */}
-      {isMobileMenuOpen && (
-        <div
-          className="fixed inset-0 z-60 md:hidden transition-opacity duration-500"
-          style={{ background: "rgba(0, 0, 0, 0.8)" }}
-          onClick={() => setIsMobileMenuOpen(false)}
-          aria-hidden="true"
-        />
-      )}
-
-      {/* MOBILE MENU PANEL - Centered Content */}
-      <div
-        className={`fixed top-0 left-0 right-0 bottom-0 z-70 md:hidden transform transition-all duration-500 ease-out ${
-          isMobileMenuOpen ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
-        }`}
-        style={{ background: "#0b1020" }}
-        role="dialog"
-        aria-modal="true"
-        aria-label="Mobile menu"
-      >
-        <div className="flex flex-col h-full">
-          
-          {/* Mobile Menu Header - Centered */}
-          <div className="flex items-center justify-center px-4 h-16 border-b border-gray-800 relative">
-            <h2 className="text-xl font-bold text-white">Menu</h2>
-            <button
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="absolute right-4 p-2 rounded-lg hover:bg-white/10 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              aria-label="Close menu"
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="md:hidden w-10 h-10 flex items-center justify-center text-white hover:bg-white/10 rounded-lg transition-colors"
+            aria-label="Toggle menu"
+          >
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
             >
-              <svg
-                className="w-6 h-6 text-white"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
+              {isOpen ? (
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth={2}
                   d="M6 18L18 6M6 6l12 12"
                 />
-              </svg>
-            </button>
-          </div>
-
-          {/* Mobile Menu Content - Centered & Vertically Aligned */}
-          <div className="flex-1 overflow-y-auto px-6 py-8 flex flex-col items-center justify-center">
-            
-            {/* Navigation Links - Centered */}
-            <nav className="w-full max-w-md space-y-3">
-              {NAV_LINKS.map((link, index) => (
-                <button
-                  key={link.path}
-                  onClick={() => handleNavigation(link.path)}
-                  className="w-full text-center px-6 py-4 text-xl font-semibold text-gray-300 hover:text-white hover:bg-blue-600/20 rounded-xl transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  style={{
-                    animationDelay: `${index * 50}ms`,
-                    animation: isMobileMenuOpen ? 'fadeInUp 0.4s ease-out forwards' : 'none'
-                  }}
-                >
-                  {link.name}
-                </button>
-              ))}
-            </nav>
-
-            {/* Auth Section - Centered */}
-            <div className="w-full max-w-md mt-12 pt-8 border-t border-gray-800">
-              {user ? (
-                <div className="space-y-4">
-                  <div className="px-6 py-4 bg-gray-900 rounded-xl border border-gray-800 text-center">
-                    <p className="text-sm text-gray-400 mb-1">Signed in as</p>
-                    <p className="text-white font-semibold truncate">{user.email}</p>
-                  </div>
-                  <button
-                    onClick={handleLogout}
-                    className="w-full bg-red-600 hover:bg-red-700 text-white px-6 py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-red-500 shadow-lg"
-                  >
-                    Logout
-                  </button>
-                </div>
               ) : (
-                <div className="space-y-4">
-                  <button
-                    onClick={() => handleNavigation("/login")}
-                    className="w-full bg-[#002B5C] hover:bg-[#003d7a] text-white px-6 py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-lg"
-                  >
-                    Sign In
-                  </button>
-                  <button
-                    onClick={() => handleNavigation("/register")}
-                    className="w-full border-2 border-[#002B5C] text-white hover:bg-[#002B5C]/20 px-6 py-4 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  >
-                    Create Account
-                  </button>
-                </div>
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
               )}
-            </div>
-          </div>
+            </svg>
+          </button>
         </div>
       </div>
-    </>
+
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.2 }}
+            className="md:hidden bg-[#0b1020] border-t border-[#1e293b] overflow-hidden"
+          >
+            <div className="px-6 py-4 space-y-3">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  className={`block px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
+                    isActive(link.path)
+                      ? "bg-blue-500/10 text-white border border-blue-500/20"
+                      : "text-gray-400 hover:bg-white/5 hover:text-white"
+                  }`}
+                >
+                  {link.name}
+                </Link>
+              ))}
+
+              <div className="pt-3 border-t border-[#1e293b] space-y-3">
+                {user ? (
+                  <>
+                    <Link
+                      to="/dashboard"
+                      className="block px-4 py-3 rounded-lg text-sm font-medium text-gray-400 hover:bg-white/5 hover:text-white transition-colors"
+                    >
+                      Dashboard
+                    </Link>
+                    <button
+                      onClick={handleLogout}
+                      className="w-full text-left px-4 py-3 rounded-lg text-sm font-medium text-gray-400 hover:bg-white/5 hover:text-white transition-colors"
+                    >
+                      Logout
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <Link
+                      to="/login"
+                      className="block px-4 py-3 rounded-lg text-sm font-medium text-gray-400 hover:bg-white/5 hover:text-white transition-colors"
+                    >
+                      Login
+                    </Link>
+                    <Link
+                      to="/register"
+                      className="block px-4 py-3 bg-blue-600 text-white text-sm font-semibold rounded-lg text-center"
+                    >
+                      Get Started
+                    </Link>
+                  </>
+                )}
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </nav>
   );
 };
 

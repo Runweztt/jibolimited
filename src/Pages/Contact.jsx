@@ -1,9 +1,26 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
+import Breadcrumb from "../Components/Breadcrumb";
+import { useAuth } from "../Context/AuthContext";
+import { fadeInUp, staggerContainer, scaleIn, buttonHover, viewportSettings } from "../utils/animations";
 
 const Contact = () => {
   const [sending, setSending] = useState(false);
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
+  const { user } = useAuth();
+
+  const handleWhatsAppClick = () => {
+    if (!user) {
+      navigate('/login');
+    } else {
+      const phoneNumber = '447533616307';
+      const message = encodeURIComponent('Hi, I want to convert my crypto to local currency and get paid instantly!');
+      window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -14,7 +31,7 @@ const Contact = () => {
     // placeholder behaviour (replace with email API or emailjs)
     try {
       await new Promise((res) => setTimeout(res, 800));
-      setSuccess("Thanks  your message was sent. We'll get back to you soon.");
+      setSuccess("Thanks! Your message was sent. We'll get back to you soon.");
     } catch (err) {
       setError("Something went wrong. Try again later.");
     } finally {
@@ -23,118 +40,324 @@ const Contact = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0b1020] text-gray-200 font-inter">
-      {/* HERO */}
-      <section className="pt-28 pb-12 px-6 md:px-12 lg:px-24 text-center">
-        <div className="max-w-4xl mx-auto">
-          <h1 className="text-4xl mt-20 md:text-6xl font-extrabold text-white mb-4">Contact Us</h1>
-          <p className="text-gray-300 max-w-3xl mx-auto text-lg">
-            We’d love to hear from you. Whether you're interested in finance or partnerships our team is ready.
-          </p>
+    <div className="min-h-screen bg-[#0b1020] text-gray-200 font-inter overflow-x-hidden">
+      
+      {/* Hero Section - Matching Home */}
+      <section className="pt-36 pb-16 px-6 md:px-12 lg:px-24">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportSettings}
+            variants={fadeInUp}
+            className="text-center"
+          >
+            <Breadcrumb items={[{ label: 'Contact Us' }]} />
+            
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight text-white mb-4 mt-8">
+              Get in{' '}
+              Touch
+            </h1>
+
+            <p className="text-lg sm:text-xl text-gray-300 max-w-3xl mx-auto mb-8">
+              We'd love to hear from you. Whether you're interested in crypto payments, partnerships, 
+              or just have questions, our team is ready to help.
+            </p>
+
+            <motion.button
+              variants={buttonHover}
+              initial="rest"
+              whileHover="hover"
+              whileTap="tap"
+              onClick={handleWhatsAppClick}
+              className="inline-block bg-gradient-to-r from-[#002B5C] to-[#003d7a] px-8 py-4 rounded-full font-semibold transition-all"
+            >
+              Transact Now
+            </motion.button>
+          </motion.div>
         </div>
       </section>
 
-      {/* CONTACT GRID */}
-      <section className="px-6 md:px-12 lg:px-24 py-16">
-        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-10">
-          {/* LEFT: INFO */}
-          <div className="space-y-6">
-            <div className="bg-[#071224] border border-[#142235] rounded-2xl p-6">
-              <h3 className="text-2xl font-bold text-white mb-2">Get in touch</h3>
-              <p className="text-gray-300">Support: Monday Friday, 9am–6pm. We'll respond as quickly as possible.</p>
-            </div>
+      {/* Contact Methods - Using Home Feature Card Pattern */}
+      <section className="py-20 px-6 md:px-12 lg:px-24 bg-[#0b1020]">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportSettings}
+            variants={fadeInUp}
+            className="text-center mb-16"
+          >
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-white mb-4">
+              Contact Channels
+            </h2>
+            <p className="text-lg text-gray-400 max-w-3xl mx-auto">
+              Support: Monday–Friday, 9am–6pm. We'll respond as quickly as possible.
+            </p>
+          </motion.div>
 
-            <div className="grid gap-4">
-              <div className="bg-[#0b0b25] border border-[#142235] rounded-2xl p-5">
-                <h4 className="text-blue-400 font-semibold">Head Office (UK)</h4>
-                <p className="text-gray-300 mt-1">Jibo Limited  22 Fleet Street, London, EC4Y 1AA</p>
-              </div>
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportSettings}
+            variants={staggerContainer}
+            className="grid md:grid-cols-3 gap-6 mb-16"
+          >
+            {[
+              {
+                icon: (
+                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                ),
+                title: 'Email Support',
+                info: 'support@jibo.com.ng',
+                link: 'mailto:support@jibo.com.ng'
+              },
+              {
+                icon: (
+                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  </svg>
+                ),
+                title: 'Phone Support',
+                info: '+447533616307',
+                link: 'tel:+447533616307'
+              },
+              {
+                icon: (
+                  <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                  </svg>
+                ),
+                title: 'WhatsApp',
+                info: 'Chat with us',
+                link: 'https://wa.me/2349069937105'
+              }
+            ].map((method, index) => (
+              <motion.a
+                key={index}
+                href={method.link}
+                target={method.link.startsWith('http') ? '_blank' : undefined}
+                rel={method.link.startsWith('http') ? 'noopener noreferrer' : undefined}
+                variants={scaleIn}
+                className="bg-[#0d1425] border border-[#1e293b] rounded-2xl p-6 hover:border-blue-500/50 hover:bg-[#111827] transition-all duration-300 block"
+              >
+                <div className="w-14 h-14 bg-blue-500/10 rounded-xl flex items-center justify-center text-blue-400 mb-4 border border-blue-500/20">
+                  {method.icon}
+                </div>
+                <h3 className="text-xl font-bold text-white mb-2">{method.title}</h3>
+                <p className="text-blue-400 font-semibold">{method.info}</p>
+              </motion.a>
+            ))}
+          </motion.div>
 
-              <div className="bg-[#0b0b25] border border-[#142235] rounded-2xl p-5">
-                <h4 className="text-blue-400 font-semibold">Nigeria Office</h4>
-                <p className="text-gray-300 mt-1">12A Adeola Odeku Street, Victoria Island, Lagos</p>
-              </div>
-
-              <div className="bg-[#0b0b25] border border-[#142235] rounded-2xl p-5">
-                <h4 className="text-blue-400 font-semibold">Email & Phone</h4>
-                <p className="text-gray-300 mt-1">support@jiboltd.com<br/>+447533616307</p>
-              </div>
-
-              <div className="flex gap-3">
-                <a className="bg-[#071224] border border-[#142235] rounded-full px-4 py-2 text-gray-300 hover:text-blue-400">Facebook</a>
-                <a className="bg-[#071224] border border-[#142235] rounded-full px-4 py-2 text-gray-300 hover:text-blue-400">Twitter</a>
-                <a className="bg-[#071224] border border-[#142235] rounded-full px-4 py-2 text-gray-300 hover:text-blue-400">LinkedIn</a>
-              </div>
-            </div>
-          </div>
-
-          {/* RIGHT: FORM */}
-          <div>
-            <form
-              onSubmit={handleSubmit}
-              className="bg-[#071224] border border-[#142235] rounded-2xl p-6 space-y-4"
+          {/* Contact Form & Office Locations Grid */}
+          <div className="grid md:grid-cols-2 gap-10">
+            
+            {/* Contact Form */}
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportSettings}
+              variants={fadeInUp}
             >
-              {success && <div className="text-green-400 text-sm">{success}</div>}
-              {error && <div className="text-red-400 text-sm">{error}</div>}
+              <h3 className="text-2xl font-bold text-white mb-6">Send us a Message</h3>
+              
+              <form
+                onSubmit={handleSubmit}
+                className="bg-[#0d1425] border border-[#1e293b] rounded-2xl p-6 space-y-4"
+              >
+                {success && <div className="text-green-400 text-sm bg-green-400/10 border border-green-400/20 rounded-lg p-3">{success}</div>}
+                {error && <div className="text-red-400 text-sm bg-red-400/10 border border-red-400/20 rounded-lg p-3">{error}</div>}
 
-              <div>
-                <label className="text-sm text-gray-300">Full name</label>
-                <input className="w-full mt-2 px-4 py-3 rounded-lg bg-[#0b0b25] border border-[#142235] text-gray-200 focus:outline-none" placeholder="Your full name" />
-              </div>
+                <div>
+                  <label className="text-sm text-gray-300 font-semibold mb-2 block">Full name</label>
+                  <input 
+                    className="w-full px-4 py-3 rounded-lg bg-[#0b1020] border border-[#1e293b] text-gray-200 focus:outline-none focus:border-blue-500/50 transition-colors" 
+                    placeholder="Your full name" 
+                    required
+                  />
+                </div>
 
-              <div>
-                <label className="text-sm text-gray-300">Email</label>
-                <input type="email" className="w-full mt-2 px-4 py-3 rounded-lg bg-[#0b0b25] border border-[#142235] text-gray-200 focus:outline-none" placeholder="you@company.com" />
-              </div>
+                <div>
+                  <label className="text-sm text-gray-300 font-semibold mb-2 block">Email</label>
+                  <input 
+                    type="email" 
+                    className="w-full px-4 py-3 rounded-lg bg-[#0b1020] border border-[#1e293b] text-gray-200 focus:outline-none focus:border-blue-500/50 transition-colors" 
+                    placeholder="you@company.com" 
+                    required
+                  />
+                </div>
 
-              <div>
-                <label className="text-sm text-gray-300">Message</label>
-                <textarea rows="5" className="w-full mt-2 px-4 py-3 rounded-lg bg-[#0b0b25] border border-[#142235] text-gray-200 focus:outline-none" placeholder="How can we help?" />
-              </div>
+                <div>
+                  <label className="text-sm text-gray-300 font-semibold mb-2 block">Message</label>
+                  <textarea 
+                    rows="5" 
+                    className="w-full px-4 py-3 rounded-lg bg-[#0b1020] border border-[#1e293b] text-gray-200 focus:outline-none focus:border-blue-500/50 transition-colors resize-none" 
+                    placeholder="How can we help?" 
+                    required
+                  />
+                </div>
 
-              <div className="flex items-center justify-between gap-4">
-                <button
+                <motion.button
                   type="submit"
                   disabled={sending}
-                  className="bg-blue-600 hover:bg-blue-700 px-6 py-2.5 rounded-full font-semibold"
+                  variants={buttonHover}
+                  initial="rest"
+                  whileHover="hover"
+                  whileTap="tap"
+                  className="w-full bg-blue-600 hover:bg-blue-700 px-6 py-4 rounded-full font-semibold transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {sending ? "Sending..." : "Send Message"}
-                </button>
-                <div className="text-sm text-gray-400">Or email us at <span className="text-blue-400">support@jiboltd.com</span></div>
+                </motion.button>
+              </form>
+            </motion.div>
+
+            {/* Office Locations */}
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={viewportSettings}
+              variants={fadeInUp}
+            >
+              <h3 className="text-2xl font-bold text-white mb-6">Our Offices</h3>
+              
+              <div className="space-y-4">
+                {[
+                  {
+                    title: 'Head Office (UK)',
+                    address: 'Jibo Currency — 22 Fleet Street, London, EC4Y 1AA',
+                    icon: (
+                      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                      </svg>
+                    )
+                  },
+                  {
+                    title: 'Nigeria Office',
+                    address: '12A Adeola Odeku Street, Victoria Island, Lagos',
+                    icon: (
+                      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                      </svg>
+                    )
+                  },
+                  {
+                    title: 'Ghana Office',
+                    address: 'Coming Soon - Accra, Ghana',
+                    icon: (
+                      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                    )
+                  },
+                  {
+                    title: 'Rwanda Office',
+                    address: 'Coming Soon - Kigali, Rwanda',
+                    icon: (
+                      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                    )
+                  }
+                ].map((office, idx) => (
+                  <div
+                    key={idx}
+                    className="bg-[#0d1425] border border-[#1e293b] rounded-2xl p-5 hover:border-blue-500/50 transition-all"
+                  >
+                    <div className="flex items-start gap-3">
+                      <div className="text-blue-400">{office.icon}</div>
+                      <div>
+                        <h4 className="text-blue-400 font-semibold mb-1">{office.title}</h4>
+                        <p className="text-gray-300 text-sm">{office.address}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
-            </form>
+            </motion.div>
+
           </div>
         </div>
       </section>
 
-      {/* MAPS */}
-      <section className="px-6 md:px-12 lg:px-24 py-16">
-        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-6">
-          <iframe
-            title="Jibo Limited UK Office"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d19800.784703957086!2d-0.1082034!3d51.5113358!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487604b95a3d1f67%3A0x34b7b197648f5c25!2sFleet%20St%2C%20London!5e0!3m2!1sen!2suk!4v1692022100821!5m2!1sen!2suk"
-            className="w-full h-64 rounded-2xl border-0"
-            allowFullScreen
-            loading="lazy"
-          />
-          <iframe
-            title="Jibo Limited Nigeria Office"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3963.341620962518!2d3.426218074687793!3d6.605635822262256!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103bf53f740c7fd9%3A0x2c0e3c5b5e60c12d!2sVictoria%20Island%2C%20Lagos!5e0!3m2!1sen!2sng!4v1692023100456!5m2!1sen!2sng"
-            className="w-full h-64 rounded-2xl border-0"
-            allowFullScreen
-            loading="lazy"
-          />
+      {/* Maps Section */}
+      <section className="py-20 px-6 md:px-12 lg:px-24 bg-[#0b1020]">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportSettings}
+            variants={fadeInUp}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-4">
+              Find Us
+            </h2>
+          </motion.div>
+
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportSettings}
+            variants={staggerContainer}
+            className="grid md:grid-cols-2 gap-6"
+          >
+            <motion.div variants={scaleIn} className="rounded-2xl overflow-hidden border border-[#1e293b]">
+              <iframe
+                title="Jibo Currency UK Office"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d19800.784703957086!2d-0.1082034!3d51.5113358!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487604b95a3d1f67%3A0x34b7b197648f5c25!2sFleet%20St%2C%20London!5e0!3m2!1sen!2suk!4v1692022100821!5m2!1sen!2suk"
+                className="w-full h-80"
+                allowFullScreen
+                loading="lazy"
+              />
+            </motion.div>
+            <motion.div variants={scaleIn} className="rounded-2xl overflow-hidden border border-[#1e293b]">
+              <iframe
+                title="Jibo Currency Nigeria Office"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3963.341620962518!2d3.426218074687793!3d6.605635822262256!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103bf53f740c7fd9%3A0x2c0e3c5b5e60c12d!2sVictoria%20Island%2C%20Lagos!5e0!3m2!1sen!2sng!4v1692023100456!5m2!1sen!2sng"
+                className="w-full h-80"
+                allowFullScreen
+                loading="lazy"
+              />
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
-      {/* Footer-ish CTA */}
-      <section className="py-16 px-6 md:px-12 lg:px-24">
-        <div className="max-w-7xl mx-auto bg-[#0b0b25] border border-[#142235] rounded-2xl p-6 text-center">
-          <h5 className="text-lg font-bold text-white mb-2">Need a tailored solution?</h5>
-          <p className="text-gray-300 mb-4">Contact our enterprise team for/partnership enquiries.</p>
-          <a href="mailto:support@jiboltd.com" className="bg-blue-600 hover:bg-blue-700 px-6 py-2.5 rounded-full text-white font-semibold">Contact Sales</a>
+      {/* Final CTA - Using Home Pattern */}
+      <section className="py-20 px-6 md:px-12 lg:px-24 bg-[#071224]">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportSettings}
+            variants={fadeInUp}
+            className="bg-[#0d1425] border border-[#1e293b] rounded-2xl p-8 md:p-12 text-center"
+          >
+            <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
+              Need a Tailored Solution?
+            </h3>
+            <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
+              Contact our enterprise team for custom integrations, partnership enquiries, 
+              or high-volume merchant solutions.
+            </p>
+            <motion.a
+              href="mailto:support@jiboltd.com"
+              variants={buttonHover}
+              initial="rest"
+              whileHover="hover"
+              whileTap="tap"
+              className="inline-block bg-blue-600 hover:bg-blue-700 px-8 py-4 rounded-full text-white font-semibold transition-all"
+            >
+              Contact Sales
+            </motion.a>
+          </motion.div>
         </div>
       </section>
+
     </div>
   );
 };

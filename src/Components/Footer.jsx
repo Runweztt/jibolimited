@@ -12,7 +12,7 @@ const Footer = () => {
               Ready to get started?
             </h2>
             <p className="text-[#cbd8f2] text-sm mt-1">
-              Join Jibo today  trade crypto or book your first ride instantly.
+              Join Jibo today — convert crypto to local currency instantly.
             </p>
           </div>
 
@@ -22,12 +22,6 @@ const Footer = () => {
               className="bg-[#002B5C] hover:bg-[#003d7a] px-5 py-2.5 rounded-full text-sm font-medium text-white transition"
             >
               Create Account
-            </a>
-            <a
-              href="#Booking"
-              className="border border-[#002B5C] hover:bg-[#002B5C] hover:text-white px-5 py-2.5 rounded-full text-sm font-medium transition"
-            >
-              Book a Ride
             </a>
           </div>
         </div>
@@ -44,7 +38,7 @@ const Footer = () => {
               className="mb-3 h-16 w-auto"
             />
             <p className="text-sm text-gray-400 max-w-xs leading-relaxed">
-              Jibo Limited empowers users with smart crypto exchange, digital
+              Jibo Currency empowers users with crypto payment solutions, digital
               finance, and mobility services all in one ecosystem.
             </p>
           </div>
@@ -55,7 +49,7 @@ const Footer = () => {
               Company
             </h3>
             <ul className="space-y-1.5 text-sm">
-              {["Home", "About Us", "Crypto", "Book Ride", "Contact"].map(
+              {["Home", "About Us", "Crypto", "Contact"].map(
                 (item, idx) => (
                   <li key={idx}>
                     <a
@@ -104,7 +98,7 @@ const Footer = () => {
 
         {/* Bottom Line */}
         <div className="border-t border-[#142235] pt-4 mt-8 text-center text-xs text-gray-500">
-          <p>© {new Date().getFullYear()} Jibo Limited. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Jibo Currency. All rights reserved.</p>
         </div>
       </div>
     </footer>
