@@ -72,7 +72,7 @@ const Footer = () => {
             <ul className="space-y-1 text-sm text-gray-400">
               <li>
                 <strong className="text-gray-200">Email:</strong>{" "}
-                support@jiboltd.com
+                info@jiboltd.com
               </li>
               <li>
                 <strong className="text-gray-200">Phone:</strong> +447533616307

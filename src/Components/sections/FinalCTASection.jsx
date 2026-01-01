@@ -133,8 +133,8 @@ const FinalCTASection = () => {
             Have questions? Our team is here to help.
           </p>
           <div className="flex flex-wrap justify-center gap-6 text-sm">
-            <a href="mailto:support@jibo.com.ng" className="text-blue-400 hover:text-blue-300 transition-colors">
-              📧 support@jibo.com.ng
+            <a href="mailto:info@jiboltd.com" className="text-blue-400 hover:text-blue-300 transition-colors">
+              info@jiboltd.com
             </a>
             <a href="tel:+447533616307" className="text-blue-400 hover:text-blue-300 transition-colors">
               📞 +447533616307

@@ -7,6 +7,7 @@ import Breadcrumb from "../Components/Breadcrumb";
 import UseCasesSection from "../Components/sections/UseCasesSection";
 import { useAuth } from "../Context/AuthContext";
 import { fadeInUp, staggerContainer, scaleIn, buttonHover, viewportSettings } from "../utils/animations";
+import '../styles/parallax.css';
 
 const About = () => {
   const navigate = useNavigate();
@@ -25,9 +26,14 @@ const About = () => {
   return (
     <div className="min-h-screen bg-[#0b1020] text-gray-200 font-inter overflow-x-hidden">
       
-      {/* Hero Section - Matching Home */}
-      <section className="pt-36 pb-16 px-6 md:px-12 lg:px-24">
-        <div className="max-w-7xl mx-auto">
+      {/* Hero Section - Dynamic with Parallax */}
+      <section className="relative pt-36 pb-16 px-6 md:px-12 lg:px-24 overflow-hidden">
+        {/* Parallax Background */}
+        <div className="hero-gradient-parallax"></div>
+        <div className="floating-shape floating-shape-1"></div>
+        <div className="floating-shape floating-shape-2"></div>
+        
+        <div className="max-w-7xl mx-auto relative z-10">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -37,9 +43,22 @@ const About = () => {
           >
             <Breadcrumb items={[{ label: 'About Us' }]} />
             
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight text-white mb-4 mt-8">
+            {/* Badge */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="inline-block mt-8 mb-6"
+            >
+              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm font-medium">
+                <span className="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></span>
+                Our Story
+              </span>
+            </motion.div>
+            
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight text-white mb-4">
               About{' '}
-              Jibo Currency
+              <span className="bg-gradient-to-r from-blue-400 to-cyan-400 text-transparent bg-clip-text">Jibo Currency</span>
             </h1>
 
             <p className="text-lg sm:text-xl text-gray-300 max-w-3xl mx-auto mb-8">

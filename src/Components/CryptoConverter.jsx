@@ -103,10 +103,10 @@ const CryptoConverter = () => {
                 }}
                 className="bg-green-500/20 text-white font-semibold text-xs px-2 py-1 rounded-full border border-green-500/30 focus:outline-none focus:border-green-500/50 cursor-pointer"
               >
-                <option value="usd" className="bg-[#0d1425]">🇺🇸 USD</option>
-                <option value="ngn" className="bg-[#0d1425]">🇳🇬 Naira</option>
-                <option value="gbp" className="bg-[#0d1425]">🇬🇧 Pounds</option>
-                <option value="eur" className="bg-[#0d1425]">🇪🇺 Euros</option>
+                <option value="usd" className="bg-[#0d1425]">$ USD</option>
+                <option value="ngn" className="bg-[#0d1425]">₦ Naira</option>
+                <option value="gbp" className="bg-[#0d1425]">£ Pounds</option>
+                <option value="eur" className="bg-[#0d1425]">€ Euros</option>
               </select>
             </div>
           </div>
