@@ -159,7 +159,7 @@ const Finance = () => {
                   onClick={() => setCurrency(cur)}
                   className={`px-6 py-3 rounded-full font-semibold transition-all ${
                     Currency.name === cur.name
-                      ? 'bg-blue-600 text-white'
+                      ? 'bg-[#002B5C] text-white'
                       : 'bg-white/5 hover:bg-white/10 border border-white/10 text-white'
                   }`}
                 >
@@ -215,7 +215,7 @@ const Finance = () => {
                 className="relative bg-[#0d1425] border border-[#1e293b] rounded-2xl p-6 hover:border-blue-500/50 hover:bg-[#111827] transition-all duration-300"
               >
                 <div className="flex items-center gap-4 mb-4">
-                  <div className="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center">
+                  <div className="w-12 h-12 bg-[#002B5C] rounded-xl flex items-center justify-center">
                     <span className="text-white font-bold text-lg">{step.number}</span>
                   </div>
                   <div className="w-10 h-10 bg-blue-500/10 rounded-lg flex items-center justify-center text-blue-400 border border-blue-500/20">
@@ -264,7 +264,7 @@ const Finance = () => {
               />
               <button
                 type="submit"
-                className="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-xl font-semibold transition-all"
+                className="bg-[#002B5C] hover:bg-[#003d7a] px-6 py-3 rounded-xl font-semibold transition-all"
               >
                 Search
               </button>
@@ -329,7 +329,7 @@ const Finance = () => {
                             e.stopPropagation();
                             handleConvert(coin);
                           }}
-                          className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg font-semibold text-sm transition-all"
+                          className="bg-[#002B5C] hover:bg-[#003d7a] px-4 py-2 rounded-lg font-semibold text-sm transition-all"
                         >
                           Convert
                         </motion.button>

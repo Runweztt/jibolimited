@@ -20,7 +20,13 @@ const CoincontextProvider = (props) => {
     fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=${Currency.name}`,options)
     .then(response => response.json())
     .then(response => {
-      setAllCoin(response);
+      // Only set if response is an array (not an error object)
+      if (Array.isArray(response)) {
+        setAllCoin(response);
+      } else {
+        console.error('API returned non-array:', response);
+        // Keep existing data if API fails
+      }
       setLoading(false);
     })
     .catch(err => {

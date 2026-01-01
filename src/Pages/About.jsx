@@ -56,7 +56,7 @@ const About = () => {
               >
                 <Link
                   to="/register"
-                  className="inline-block bg-blue-600 hover:bg-blue-700 px-8 py-4 rounded-full font-semibold transition-all"
+                  className="inline-block bg-[#002B5C] hover:bg-[#003d7a] px-8 py-4 rounded-full font-semibold transition-all"
                 >
                   Create Account
                 </Link>

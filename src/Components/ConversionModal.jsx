@@ -197,7 +197,7 @@ const ConversionModal = ({ isOpen, onClose }) => {
               {/* Convert Button */}
               <button
                 onClick={onClose}
-                className="w-full mt-6 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 rounded-xl transition-all"
+                className="w-full mt-6 bg-[#002B5C] hover:bg-[#003d7a] text-white font-semibold py-4 rounded-xl transition-all"
               >
                 Proceed to Convert
               </button>

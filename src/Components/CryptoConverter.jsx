@@ -16,7 +16,7 @@ const CryptoConverter = () => {
       const updatedCrypto = allCoin.find(coin => coin.symbol === currentSymbol) || allCoin[0];
       setSelectedCrypto(updatedCrypto);
     }
-  }, [allCoin]);
+  }, [allCoin, Currency.name]);
 
   // Calculate fiat amount when crypto amount or selected crypto changes
   useEffect(() => {
@@ -24,7 +24,7 @@ const CryptoConverter = () => {
       const amount = parseFloat(cryptoAmount) || 0;
       const price = selectedCrypto.current_price || 0;
       const total = amount * price;
-      setFiatAmount(total.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 }));
+      setFiatAmount(total.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
     }
   }, [selectedCrypto, cryptoAmount, Currency.name, loading, allCoin]);
 
@@ -94,8 +94,7 @@ const CryptoConverter = () => {
                     { name: 'usd', symbol: '$' },
                     { name: 'ngn', symbol: '₦' },
                     { name: 'gbp', symbol: '£' },
-                    { name: 'eur', symbol: '€' },
-                    { name: 'ghs', symbol: '₵' }
+                    { name: 'eur', symbol: '€' }
                   ];
                   const selected = currencies.find(c => c.name === e.target.value);
                   if (selected && setCurrency) {
@@ -108,7 +107,6 @@ const CryptoConverter = () => {
                 <option value="ngn" className="bg-[#0d1425]">🇳🇬 Naira</option>
                 <option value="gbp" className="bg-[#0d1425]">🇬🇧 Pounds</option>
                 <option value="eur" className="bg-[#0d1425]">🇪🇺 Euros</option>
-                <option value="ghs" className="bg-[#0d1425]">🇬🇭 Cedis</option>
               </select>
             </div>
           </div>

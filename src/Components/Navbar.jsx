@@ -88,7 +88,7 @@ const Navbar = () => {
                 {isActive(link.path) && (
                   <motion.div
                     layoutId="navbar-indicator"
-                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-blue-600"
+                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-[#002B5C]"
                     transition={{ type: "spring", stiffness: 380, damping: 30 }}
                   />
                 )}
@@ -129,7 +129,7 @@ const Navbar = () => {
                 >
                   <Link
                     to="/register"
-                    className="px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold rounded-full transition-all"
+                    className="px-6 py-2.5 bg-[#002B5C] hover:bg-[#003d7a] text-white text-sm font-semibold rounded-full transition-all"
                   >
                     Get Started
                   </Link>
@@ -221,7 +221,7 @@ const Navbar = () => {
                     </Link>
                     <Link
                       to="/register"
-                      className="block px-4 py-3 bg-blue-600 text-white text-sm font-semibold rounded-lg text-center"
+                      className="block px-4 py-3 bg-[#002B5C] text-white text-sm font-semibold rounded-lg text-center"
                     >
                       Get Started
                     </Link>

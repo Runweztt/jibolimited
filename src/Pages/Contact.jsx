@@ -207,7 +207,7 @@ const Contact = () => {
                   initial="rest"
                   whileHover="hover"
                   whileTap="tap"
-                  className="w-full bg-blue-600 hover:bg-blue-700 px-6 py-4 rounded-full font-semibold transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full bg-[#002B5C] hover:bg-[#003d7a] px-6 py-4 rounded-full font-semibold transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {sending ? "Sending..." : "Send Message"}
                 </motion.button>
@@ -350,7 +350,7 @@ const Contact = () => {
               initial="rest"
               whileHover="hover"
               whileTap="tap"
-              className="inline-block bg-blue-600 hover:bg-blue-700 px-8 py-4 rounded-full text-white font-semibold transition-all"
+              className="inline-block bg-[#002B5C] hover:bg-[#003d7a] px-8 py-4 rounded-full text-white font-semibold transition-all"
             >
               Contact Sales
             </motion.a>

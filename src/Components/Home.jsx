@@ -25,7 +25,7 @@ const Home = () => {
         <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-24 overflow-hidden">
           <div className="flex gap-8 whitespace-nowrap items-center animate-scroll">
             {[...allCoin.slice(0, 10), ...allCoin.slice(0, 10)].map((coin, i) => (
-              <div key={coin?.id ?? i} className="flex items-center gap-3 px-3">
+              <div key={`${coin?.id}-${i}`} className="flex items-center gap-3 px-3">
                 <img src={coin?.image} alt={coin?.name} className="w-6 h-6 rounded-full" />
                 <div className="text-sm">
                   <p className="font-medium">{coin?.symbol?.toUpperCase()}</p>

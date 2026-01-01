@@ -185,7 +185,7 @@ const Dashboard = () => {
                     whileHover="hover"
                     whileTap="tap"
                     onClick={action.action}
-                    className="w-full py-4 rounded-xl font-semibold transition-all bg-blue-600 hover:bg-blue-700 text-white"
+                    className="w-full py-4 rounded-xl font-semibold transition-all bg-[#002B5C] hover:bg-[#003d7a] text-white"
                   >
                     Get Started
                   </motion.button>

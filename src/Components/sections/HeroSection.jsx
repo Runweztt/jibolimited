@@ -68,21 +68,27 @@ const HeroSection = () => {
             {/* Key Benefits */}
             <div className="flex flex-wrap gap-4 justify-center md:justify-start text-sm text-gray-400">
               <div className="flex items-center gap-2">
-                <svg className="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
+                <div className="w-6 h-6 rounded-full border-2 border-emerald-500 flex items-center justify-center">
+                  <svg className="w-3.5 h-3.5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
                 <span>Instant Settlement</span>
               </div>
               <div className="flex items-center gap-2">
-                <svg className="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
+                <div className="w-6 h-6 rounded-full border-2 border-emerald-500 flex items-center justify-center">
+                  <svg className="w-3.5 h-3.5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
                 <span>Lower Fees</span>
               </div>
               <div className="flex items-center gap-2">
-                <svg className="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
+                <div className="w-6 h-6 rounded-full border-2 border-emerald-500 flex items-center justify-center">
+                  <svg className="w-3.5 h-3.5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
                 <span>All Cryptocurrencies</span>
               </div>
             </div>
@@ -95,7 +101,7 @@ const HeroSection = () => {
                 whileHover="hover"
                 whileTap="tap"
                 onClick={handleWhatsAppClick}
-                className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-all"
+                className="px-6 py-3 bg-[#002B5C] hover:bg-[#003d7a] text-white font-semibold rounded-lg transition-all"
               >
                 Transact Now
               </motion.button>
