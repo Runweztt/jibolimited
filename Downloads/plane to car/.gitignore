@@ -1,0 +1,51 @@
+# ── Environment & Secrets ──────────────────────────────────────
+.env
+.env.local
+.env.production
+.env.staging
+backend/.env
+frontend/.env
+frontend/.env.local
+
+# ── Database / SQL (keep locally, never push) ──────────────────
+*.sql
+**/*.sql
+
+# ── Python ─────────────────────────────────────────────────────
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pycache
+venv/
+.venv/
+env/
+*.egg-info/
+dist/
+build/
+.Python
+
+# ── Node / Frontend ────────────────────────────────────────────
+node_modules/
+frontend/dist/
+frontend/dist-ssr/
+*.local
+
+# ── Logs ───────────────────────────────────────────────────────
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ── OS & Editor ────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.suo
+*.sw?
+
+# ── Misc ───────────────────────────────────────────────────────
+*.zip
+*.tar.gz

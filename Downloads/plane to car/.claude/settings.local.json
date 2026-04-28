@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(tree -L 3 -d \"/mnt/c/Users/Amari/Downloads/plane to car\" 2>/dev/null || find \"/mnt/c/Users/Amari/Downloads/plane to car\" -type d -not -path \"*/node_modules/*\" | head -50)",
+      "Bash(find \"/mnt/c/Users/Amari/Downloads/plane to car\" -name \".env*\" -o -name \"secret*\" -o -name \"*key*\" 2>/dev/null | grep -v node_modules | head -20)",
+      "Bash(find \"/mnt/c/Users/Amari/Downloads/plane to car\" -name \"*.env\" -o -name \"*.env.local\" -o -name \"*.env.production\" 2>/dev/null | grep -v node_modules)",
+      "Bash(grep -r \"password\\\\|secret\\\\|api.key\\\\|API_KEY\\\\|token\\\\|credentials\" \"/mnt/c/Users/Amari/Downloads/plane to car/backend\" --include=\"*.py\" 2>/dev/null | grep -v \"Binary\" | head -20)",
+      "Bash(tree -L 2 \"/mnt/c/Users/Amari/Downloads/plane to car\" -I \"node_modules\" 2>/dev/null || find \"/mnt/c/Users/Amari/Downloads/plane to car\" -maxdepth 2 -not -path \"*/node_modules/*\" | sort)"
+    ]
+  }
+}
